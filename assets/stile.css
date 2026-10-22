@@ -1,0 +1,110 @@
+/* Comune che vai · Fonti e dati di ogni video
+   Layout: colonna unica centrata (max 960 px); testata, elenco dei video o scheda del video, piede.
+   Stesso stile dei video: fondo carta, blu notte, un solo accento blu, Inter. */
+:root {
+  --carta: #f6f3ec;
+  --superficie: #ffffff;
+  --inchiostro: #1c2230;
+  --grigio: #565a63;
+  --accento: #1f5fbf;
+  --linea: #e2dccf;
+  --riga: #faf8f3;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --carta: #12161e; --superficie: #1b212c; --inchiostro: #ece8df; --grigio: #a5a9b2;
+    --accento: #8fb0e3; --linea: #2c3443; --riga: #171c26; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--carta); color: var(--inchiostro); font-family: var(--font);
+  font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 56px;
+}
+.pagina { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+a { color: var(--accento); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
+h1, h2, h3 { margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 800; line-height: 1.15; }
+h2 { font-size: 22px; font-weight: 800; }
+p { margin: 0; }
+
+.testata { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+.testata img { width: 52px; height: 52px; border-radius: 50%; box-shadow: 0 0 0 1px var(--linea); flex: none; }
+.testata .marchio { font-weight: 800; font-size: 19px; line-height: 1.2; }
+.testata .motto { color: var(--grigio); font-size: 14px; }
+.intro { display: flex; flex-direction: column; gap: 14px; max-width: 65ch; }
+.intro p { color: var(--grigio); }
+.indietro { font-size: 15px; font-weight: 600; text-decoration: none; }
+.indietro:hover { text-decoration: underline; }
+
+.elenco { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 2px solid var(--inchiostro); }
+.elenco li { border-bottom: 1px solid var(--linea); padding-block: 18px; display: grid; grid-template-columns: 3.2em minmax(0, 1fr); gap: 4px 14px; }
+.elenco .num { font-weight: 800; color: var(--accento); font-variant-numeric: tabular-nums; font-size: 20px; line-height: 1.3; }
+.elenco .tit { font-weight: 700; font-size: 18px; line-height: 1.3; }
+.elenco .tit a { color: inherit; text-decoration: none; }
+.elenco .tit a:hover { text-decoration: underline; }
+.elenco .info { grid-column: 2; color: var(--grigio); font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.vuoto { border-top: 2px solid var(--inchiostro); padding-top: 24px; display: flex; flex-direction: column; gap: 8px; max-width: 60ch; }
+.vuoto strong { font-size: 18px; }
+.vuoto p { color: var(--grigio); }
+
+.come { display: grid; gap: 16px 32px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.come div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.come h3 { font-size: 16px; font-weight: 700; }
+.come p { color: var(--grigio); font-size: 15px; }
+
+.meta { color: var(--grigio); font-size: 15px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.azioni { display: flex; flex-wrap: wrap; gap: 10px; }
+.bottone {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 10px;
+  font-weight: 600; text-decoration: none; border: 1px solid var(--linea); background: var(--superficie); color: var(--accento);
+}
+.bottone.pieno { background: var(--accento); border-color: var(--accento); color: var(--carta); }
+.bottone:hover { text-decoration: underline; }
+.bottone svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+.scheda { margin: 0; display: grid; grid-template-columns: minmax(0, 12em) minmax(0, 1fr); border-top: 2px solid var(--inchiostro); }
+.scheda dt, .scheda dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--linea); }
+.scheda dt { font-weight: 700; padding-right: 16px; }
+.scheda dd { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 560px) {
+  .scheda { grid-template-columns: minmax(0, 1fr); }
+  .scheda dt { border-bottom: 0; padding-bottom: 0; }
+}
+
+.sezione { display: flex; flex-direction: column; gap: 14px; }
+.nota { color: var(--grigio); font-size: 14px; max-width: 70ch; }
+.fasce { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.fasce li { display: flex; align-items: center; gap: 6px; }
+.fasce i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; flex: none; box-shadow: 0 0 0 1px var(--linea); }
+
+.tabella-box { overflow-x: auto; border: 1px solid var(--linea); border-radius: 12px; background: var(--superficie); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--linea); white-space: nowrap; }
+td.testo { white-space: normal; min-width: 12em; }
+th { font-size: 13px; font-weight: 700; color: var(--grigio); background: var(--superficie); position: sticky; top: 0; }
+th button { all: unset; cursor: pointer; display: inline-flex; gap: 4px; align-items: center; }
+th button:hover { color: var(--inchiostro); }
+th[aria-sort="ascending"] button::after { content: "▲"; font-size: 10px; }
+th[aria-sort="descending"] button::after { content: "▼"; font-size: 10px; }
+td.num, th.num { text-align: right; }
+tr.citato td { background: var(--riga); font-weight: 600; }
+.cerca { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.cerca label { font-weight: 600; }
+.cerca input {
+  font: inherit; min-height: 44px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--linea);
+  background: var(--superficie); color: var(--inchiostro); width: min(320px, 100%);
+}
+.conteggio { color: var(--grigio); font-size: 14px; }
+.altri { align-self: flex-start; font: inherit; }
+
+.piede { border-top: 1px solid var(--linea); padding-top: 20px; color: var(--grigio); font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
