@@ -141,10 +141,6 @@ def pagina_video(v, s, uscita):
 <dt>Limiti</dt><dd>{e(s['limiti'])}</dd>
 <dt>Valori per comune</dt><dd>{e(valori)}</dd>
 </dl></section>
-<section class="sezione" aria-labelledby="t-numeri"><h2 id="t-numeri">Numeri del video</h2>
-<p class="nota">Ogni numero mostrato o detto nel video.</p>
-<div class="tabella-box"><table><thead><tr><th>Cosa</th><th>Comune</th><th class="num">Valore</th><th>Nota</th></tr></thead>
-<tbody>{numeri}</tbody></table></div></section>
 {sezione_mappa}<section class="sezione" aria-labelledby="t-comuni"><h2 id="t-comuni">Tutti i comuni</h2>
 <p class="nota">{format_it(s['n_comuni'])} comuni con i codici ISTAT 2026{(", " + str(s["n_senza_dato"]) + " senza dato") if s["n_senza_dato"] else ""}. In evidenza quelli citati nel video. Tocca il nome di una colonna per ordinare{"; tocca un comune per vederlo sulla mappa" if con_mappa else ""}.</p>
 {"" if con_mappa else legenda}
@@ -156,6 +152,10 @@ def pagina_video(v, s, uscita):
 </tr></thead><tbody id="corpo"></tbody></table></div>
 <button class="bottone altri" id="altri" type="button" hidden>Mostra altri comuni</button>
 </section>
+<section class="sezione" aria-labelledby="t-numeri"><h2 id="t-numeri">Numeri del video</h2>
+<p class="nota">Ogni numero mostrato o detto nel video.</p>
+<div class="tabella-box"><table><thead><tr><th>Cosa</th><th>Comune</th><th class="num">Valore</th><th>Nota</th></tr></thead>
+<tbody>{numeri}</tbody></table></div></section>
 <script type="application/json" id="dati">{json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")}</script>
 <script src="../../assets/tabella.js"></script>
 {script_mappa}'''
@@ -184,9 +184,7 @@ def indice(voci, uscita):
             pub = f"<span>{data_it(v['pubblicato'])}</span>" if v.get('pubblicato') else ''
             base = f"video/{e(v['cartella'])}/"
             corpo += (f'<li><span class="num">{e(s["numero"])}</span><span class="tit"><a href="{base}index.html">{e(s["titolo"])}</a></span>'
-                      f'<span class="info">{pub}<span>{e(s["fonte"].split(" – ")[0])}, {e(s["anno"])}</span>'
-                      f'<a href="{base}{e(s["file"]["xlsx"])}" download{clic("scarica-excel-" + v["cartella"], "Scarica Excel · " + v["cartella"])}>Excel</a>'
-                      f'<a href="{base}{e(s["file"]["csv"])}" download{clic("scarica-csv-" + v["cartella"], "Scarica CSV · " + v["cartella"])}>CSV</a></span></li>')
+                      f'<span class="info">{pub}<span>{e(s["fonte"].split(" – ")[0])}, {e(s["anno"])}</span></span></li>')
         corpo += '</ul>'
     else:
         corpo += '''<div class="vuoto"><strong>Il primo video arriva a breve.</strong>
