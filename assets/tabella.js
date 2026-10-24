@@ -11,6 +11,7 @@
   const conta = document.getElementById('conteggio');
   const altri = document.getElementById('altri');
   const PASSO = 200;
+  const conMappa = !!document.getElementById('mappa');
   let mostrate = PASSO;
   let ordine = { col: 0, verso: 1 };
   // righe: [codice, comune, provincia, valore, fascia, nel_video]
@@ -38,7 +39,17 @@
     for (const { r } of lista.slice(0, mostrate)) {
       const tr = document.createElement('tr');
       if (r[5]) tr.className = 'citato';
-      tr.appendChild(cella(r[1], 'testo'));
+      if (conMappa) {
+        const td0 = document.createElement('td');
+        td0.className = 'testo';
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'link-comune'; b.textContent = r[1];
+        b.setAttribute('aria-label', r[1] + ': mostra sulla mappa');
+        b.addEventListener('click', () => document.dispatchEvent(new CustomEvent('comune:seleziona', { detail: r[0] })));
+        td0.appendChild(b); tr.appendChild(td0);
+      } else {
+        tr.appendChild(cella(r[1], 'testo'));
+      }
       tr.appendChild(cella(r[2]));
       if (conValori) tr.appendChild(cella(r[3] === null ? '—' : fmt.format(r[3]), 'num'));
       const f = r[4];

@@ -107,4 +107,24 @@ tr.citato td { background: var(--riga); font-weight: 600; }
 .altri { align-self: flex-start; font: inherit; }
 
 .piede { border-top: 1px solid var(--linea); padding-top: 20px; color: var(--grigio); font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
+/* mappa interattiva */
+.mappa-box { position: relative; border: 1px solid var(--linea); border-radius: 12px; background: var(--superficie); overflow: hidden; }
+.mappa-box canvas { display: block; width: 100%; height: clamp(420px, 72vh, 720px); touch-action: pan-y; cursor: grab; }
+.mappa-box canvas:active { cursor: grabbing; }
+.mappa-comandi { position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; }
+.mappa-comandi button {
+  width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--linea); background: var(--superficie);
+  color: var(--inchiostro); font: 700 20px var(--font); cursor: pointer; display: grid; place-items: center;
+}
+.mappa-comandi button.testo { font-size: 12px; font-weight: 700; }
+.mappa-comandi button:hover { color: var(--accento); }
+.mappa-avviso {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 80%; text-align: center;
+  background: var(--inchiostro); color: var(--carta); padding: 10px 16px; border-radius: 10px; font-size: 15px; font-weight: 600;
+  pointer-events: none;
+}
+.mappa-info { min-height: 3.2em; display: flex; flex-direction: column; gap: 2px; }
+.mappa-nome { font-weight: 700; font-size: 18px; }
+.link-comune { all: unset; cursor: pointer; color: var(--accento); text-decoration: underline; text-underline-offset: 2px; }
+.link-comune:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

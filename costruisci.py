@@ -101,7 +101,26 @@ def pagina_video(v, s, uscita):
     colori = s.get('colori', [])
     fasce = ''.join(f'<li><i style="background:{c}"></i>{e(f["testo"])}</li>' for f, c in zip(s['fasce'], colori))
     th_val = f'<th class="num" data-col="3"><button type="button">Valore{e(unita)}</button></th>' if s['con_valori'] else ''
-    dati_pag = dict(con_valori=s['con_valori'], fasce=s['fasce'], colori=colori, comuni=s['comuni'])
+    dati_pag = dict(con_valori=s['con_valori'], fasce=s['fasce'], colori=colori, comuni=s['comuni'],
+                    unita=s.get('unita', ''), indicatore=s['indicatore'], cartella=c)
+    # mappa interattiva: c'è se esiste il file dei confini (sito/geometrie_sito.py)
+    con_mappa = os.path.exists(os.path.join(QUI, 'assets', 'comuni_2026.js'))
+    if con_mappa and s['n_senza_dato']:
+        fasce += '<li><i style="background:#a3a7b0"></i>dato non disponibile</li>'
+    legenda = f'<ul class="fasce" aria-label="Fasce di colore della mappa">{fasce}</ul>'
+    sezione_mappa = f'''<section class="sezione" aria-labelledby="t-mappa"><h2 id="t-mappa">La mappa</h2>
+<p class="nota">Gli stessi colori del video. Tocca un comune per vedere il suo valore; ingrandisci con due dita sul telefono, con Ctrl + rotellina o con i pulsanti sul computer.</p>
+{legenda}
+<div class="mappa-box" id="mappa">
+<canvas role="img" aria-label="Mappa dei comuni italiani colorati per {e(s['indicatore'].lower())}. I valori sono anche nella tabella qui sotto."></canvas>
+<div class="mappa-comandi"><button type="button" data-zoom="piu" aria-label="Ingrandisci">+</button><button type="button" data-zoom="meno" aria-label="Rimpicciolisci">−</button><button type="button" class="testo" data-zoom="italia" aria-label="Torna all'Italia intera">ITA</button></div>
+<p class="mappa-avviso" hidden></p>
+</div>
+<div class="mappa-info" id="mappa-info" aria-live="polite"></div>
+</section>
+''' if con_mappa else ''
+    script_mappa = ('<script src="../../assets/d3.min.js"></script>\n<script src="../../assets/comuni_2026.js"></script>\n'
+                    '<script src="../../assets/mappa.js"></script>\n') if con_mappa else ''
 
     corpo = testa(f"{s['titolo']} · Comune che vai", f"Fonte, metodo e dati comune per comune del video «{s['titolo']}».", '../../')
     corpo += f'''<a class="indietro" href="../../index.html">← Tutti i video</a>
@@ -126,9 +145,9 @@ def pagina_video(v, s, uscita):
 <p class="nota">Ogni numero mostrato o detto nel video.</p>
 <div class="tabella-box"><table><thead><tr><th>Cosa</th><th>Comune</th><th class="num">Valore</th><th>Nota</th></tr></thead>
 <tbody>{numeri}</tbody></table></div></section>
-<section class="sezione" aria-labelledby="t-comuni"><h2 id="t-comuni">Tutti i comuni</h2>
-<p class="nota">{format_it(s['n_comuni'])} comuni con i codici ISTAT 2026{(", " + str(s["n_senza_dato"]) + " senza dato") if s["n_senza_dato"] else ""}. In evidenza quelli citati nel video. Tocca il nome di una colonna per ordinare.</p>
-<ul class="fasce" aria-label="Fasce di colore della mappa">{fasce}</ul>
+{sezione_mappa}<section class="sezione" aria-labelledby="t-comuni"><h2 id="t-comuni">Tutti i comuni</h2>
+<p class="nota">{format_it(s['n_comuni'])} comuni con i codici ISTAT 2026{(", " + str(s["n_senza_dato"]) + " senza dato") if s["n_senza_dato"] else ""}. In evidenza quelli citati nel video. Tocca il nome di una colonna per ordinare{"; tocca un comune per vederlo sulla mappa" if con_mappa else ""}.</p>
+{"" if con_mappa else legenda}
 <div class="cerca"><label for="cerca">Cerca il tuo comune</label><input id="cerca" type="search" placeholder="Nome o sigla della provincia" autocomplete="off">
 <span class="conteggio" id="conteggio" aria-live="polite"></span></div>
 <div class="tabella-box"><table><thead><tr>
@@ -139,7 +158,7 @@ def pagina_video(v, s, uscita):
 </section>
 <script type="application/json" id="dati">{json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")}</script>
 <script src="../../assets/tabella.js"></script>
-'''
+{script_mappa}'''
     corpo += piede()
     open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
 
