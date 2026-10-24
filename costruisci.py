@@ -32,6 +32,13 @@ ICONA_FUORI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/>
 e = lambda t: html.escape(str(t), quote=True)
 
 
+def ver(nome):
+    """assets/nome?v=<impronta>: cambia a ogni modifica del file, così il browser non usa una copia vecchia."""
+    import hashlib
+    h = hashlib.md5(open(os.path.join(QUI, 'assets', nome), 'rb').read()).hexdigest()[:8]
+    return f'assets/{nome}?v={h}'
+
+
 def clic(nome, titolo):
     """Attributi GoatCounter per contare i click su un link (eventi nel cruscotto)."""
     return f' data-goatcounter-click="{e(nome)}" data-goatcounter-title="{e(titolo)}"'
@@ -53,7 +60,7 @@ def testa(titolo, descrizione, base):
 <link rel="icon" href="{base}assets/icona.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="{base}assets/stile.css">
+<link rel="stylesheet" href="{base}{ver('stile.css')}">
 <script data-goatcounter="{GOATCOUNTER}" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -119,8 +126,8 @@ def pagina_video(v, s, uscita):
 <div class="mappa-info" id="mappa-info" aria-live="polite"></div>
 </section>
 ''' if con_mappa else ''
-    script_mappa = ('<script src="../../assets/d3.min.js"></script>\n<script src="../../assets/comuni_2026.js"></script>\n'
-                    '<script src="../../assets/mappa.js"></script>\n') if con_mappa else ''
+    script_mappa = (f'<script src="../../{ver("d3.min.js")}"></script>\n<script src="../../{ver("comuni_2026.js")}"></script>\n'
+                    f'<script src="../../{ver("mappa.js")}"></script>\n') if con_mappa else ''
 
     corpo = testa(f"{s['titolo']} · Comune che vai", f"Fonte, metodo e dati comune per comune del video «{s['titolo']}».", '../../')
     corpo += f'''<a class="indietro" href="../../index.html">← Tutti i video</a>
@@ -157,7 +164,7 @@ def pagina_video(v, s, uscita):
 <div class="tabella-box"><table><thead><tr><th>Cosa</th><th>Comune</th><th class="num">Valore</th><th>Nota</th></tr></thead>
 <tbody>{numeri}</tbody></table></div></section>
 <script type="application/json" id="dati">{json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")}</script>
-<script src="../../assets/tabella.js"></script>
+<script src="../../{ver('tabella.js')}"></script>
 {script_mappa}'''
     corpo += piede()
     open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
