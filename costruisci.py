@@ -24,10 +24,17 @@ MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 
 PROFILI = [('Instagram', 'https://www.instagram.com/comunechevai/'),
            ('TikTok', 'https://www.tiktok.com/@comunechevai'),
            ('YouTube', 'https://www.youtube.com/@comunechevai')]
+# Statistiche delle visite: GoatCounter (senza cookie), cruscotto su https://comunechevai.goatcounter.com
+GOATCOUNTER = 'https://comunechevai.goatcounter.com/count'
 ICONA_SCARICA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>'
 ICONA_FUORI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M18 14v5H5V6h5"/></svg>'
 
 e = lambda t: html.escape(str(t), quote=True)
+
+
+def clic(nome, titolo):
+    """Attributi GoatCounter per contare i click su un link (eventi nel cruscotto)."""
+    return f' data-goatcounter-click="{e(nome)}" data-goatcounter-title="{e(titolo)}"'
 
 
 def data_it(iso):
@@ -47,6 +54,7 @@ def testa(titolo, descrizione, base):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="{base}assets/stile.css">
+<script data-goatcounter="{GOATCOUNTER}" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <main class="pagina">
@@ -56,7 +64,7 @@ def testa(titolo, descrizione, base):
 
 
 def piede():
-    profili = ' · '.join(f'<a href="{u}">{n}</a>' for n, u in PROFILI)
+    profili = ' · '.join(f'<a href="{u}"{clic("profilo-" + n.lower(), "Profilo " + n)}>{n}</a>' for n, u in PROFILI)
     return f'''<footer class="piede"><p>Comune che vai: mappe dei comuni italiani raccontate con dati pubblici.</p>
 <p>@comunechevai su {profili}</p></footer>
 </main>
@@ -79,7 +87,8 @@ def pagina_video(v, s, uscita):
         shutil.copy2(os.path.join(src, s['file'][k]), os.path.join(dest, s['file'][k]))
 
     unita = f" ({s['unita']})" if s.get('unita') else ''
-    guarda = ''.join(f'<a class="bottone" href="{e(v[k])}">{ICONA_FUORI}Guarda su {n}</a>'
+    c = v['cartella']
+    guarda = ''.join(f'<a class="bottone" href="{e(v[k])}"{clic(f"guarda-{k}-{c}", f"Guarda su {n} · {c}")}>{ICONA_FUORI}Guarda su {n}</a>'
                      for k, n in (('instagram', 'Instagram'), ('tiktok', 'TikTok'), ('youtube', 'YouTube')) if v.get(k))
     pub = f" · pubblicato il {data_it(v['pubblicato'])}" if v.get('pubblicato') else ''
     valori = ('Sì: per ogni comune c\'è il valore esatto e la fascia di colore della mappa.' if s['con_valori'] else
@@ -99,14 +108,14 @@ def pagina_video(v, s, uscita):
 <header class="intro"><h1>{e(s['titolo'])}</h1>
 <div class="meta"><span>Video {e(s['numero'])}{pub}</span><span>Dati aggiornati il {data_it(s['generato_il'])}</span></div></header>
 <div class="azioni">
-<a class="bottone pieno" href="{e(s['file']['xlsx'])}" download>{ICONA_SCARICA}Scarica Excel</a>
-<a class="bottone" href="{e(s['file']['csv'])}" download>{ICONA_SCARICA}Scarica CSV</a>
-<a class="bottone" href="{e(s['fonte_url'])}">{ICONA_FUORI}Fonte originale</a>{guarda}
+<a class="bottone pieno" href="{e(s['file']['xlsx'])}" download{clic(f"scarica-excel-{c}", f"Scarica Excel · {c}")}>{ICONA_SCARICA}Scarica Excel</a>
+<a class="bottone" href="{e(s['file']['csv'])}" download{clic(f"scarica-csv-{c}", f"Scarica CSV · {c}")}>{ICONA_SCARICA}Scarica CSV</a>
+<a class="bottone" href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>{ICONA_FUORI}Fonte originale</a>{guarda}
 </div>
 <section class="sezione" aria-labelledby="t-scheda"><h2 id="t-scheda">Da dove vengono i numeri</h2>
 <dl class="scheda">
 <dt>Indicatore</dt><dd>{e(s['indicatore'] + unita)}</dd>
-<dt>Fonte</dt><dd><a href="{e(s['fonte_url'])}">{e(s['fonte'])}</a></dd>
+<dt>Fonte</dt><dd><a href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>{e(s['fonte'])}</a></dd>
 <dt>Anno dei dati</dt><dd>{e(s['anno'])}</dd>
 <dt>Come è calcolato</dt><dd>{e(s['metodo'])}</dd>
 <dt>Classifiche</dt><dd>{e(s['soglia'])}</dd>
@@ -157,7 +166,8 @@ def indice(voci, uscita):
             base = f"video/{e(v['cartella'])}/"
             corpo += (f'<li><span class="num">{e(s["numero"])}</span><span class="tit"><a href="{base}index.html">{e(s["titolo"])}</a></span>'
                       f'<span class="info">{pub}<span>{e(s["fonte"].split(" – ")[0])}, {e(s["anno"])}</span>'
-                      f'<a href="{base}{e(s["file"]["xlsx"])}" download>Excel</a><a href="{base}{e(s["file"]["csv"])}" download>CSV</a></span></li>')
+                      f'<a href="{base}{e(s["file"]["xlsx"])}" download{clic("scarica-excel-" + v["cartella"], "Scarica Excel · " + v["cartella"])}>Excel</a>'
+                      f'<a href="{base}{e(s["file"]["csv"])}" download{clic("scarica-csv-" + v["cartella"], "Scarica CSV · " + v["cartella"])}>CSV</a></span></li>')
         corpo += '</ul>'
     else:
         corpo += '''<div class="vuoto"><strong>Il primo video arriva a breve.</strong>

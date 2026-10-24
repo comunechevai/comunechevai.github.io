@@ -33,6 +33,16 @@ Claude esporta i dati del video, aggiunge il video a `video.json`, lancia `pytho
 - **A mano:** carica nel repository la nuova cartella `video/NN_tema/`, `index.html` e `video.json` (stessa procedura del punto 3: i file con lo stesso nome vengono sostituiti).
 - **Senza fare niente:** collega GitHub a Claude dalle impostazioni di claude.ai (Connettori) e dai accesso al repository `comunechevai/comunechevai.github.io`. Da lì in poi Claude pubblica l'aggiornamento direttamente, sempre dopo il tuo ok.
 
+## Statistiche delle visite
+
+Il sito usa **GoatCounter** (senza cookie, quindi senza banner): cruscotto su https://comunechevai.goatcounter.com, con l'account del progetto. `costruisci.py` mette lo script in ogni pagina e conta come eventi i click su «Scarica Excel», «Scarica CSV», «Fonte originale», «Guarda su…» e sui profili social (nomi tipo `scarica-excel-01_eta`).
+
+Per sapere da quale social arrivano le visite, il link in bio ha un parametro diverso per piattaforma (sezione «Campagne» del cruscotto):
+
+- Instagram: `https://comunechevai.github.io/?utm_source=instagram&utm_campaign=bio`
+- YouTube: `https://comunechevai.github.io/?utm_source=youtube&utm_campaign=bio`
+- TikTok (quando si sblocca il link): `https://comunechevai.github.io/?utm_source=tiktok&utm_campaign=bio`
+
 ## Prima di pubblicare un video sul sito
 
 - I file sono generati da `dati.py`, gli stessi numeri del video: niente si ricopia a mano.
