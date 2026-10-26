@@ -15,7 +15,8 @@
   let mostrate = PASSO;
   let ordine = { col: 0, verso: 1 };
   // righe: [codice, comune, provincia, valore, fascia, nel_video]
-  const righe = D.comuni.map((r) => ({ r, chiave: (r[1] + ' ' + r[2] + ' ' + r[0]).toLocaleLowerCase('it') }));
+  // r[6] (facoltativo, pagine con zone): altri nomi su cui cercare, es. tutti i quartieri di un CAP
+  const righe = D.comuni.map((r) => ({ r, chiave: (r[1] + ' ' + r[2] + ' ' + r[0] + ' ' + (r[6] || '')).toLocaleLowerCase('it') }));
 
   function cella(testo, classe) {
     const td = document.createElement('td');
@@ -64,7 +65,8 @@
       frag.appendChild(tr);
     }
     corpo.replaceChildren(frag);
-    conta.textContent = lista.length.toLocaleString('it-IT') + (lista.length === 1 ? ' comune' : ' comuni') +
+    const [sing, plur] = D.parola || ['comune', 'comuni'];
+    conta.textContent = lista.length.toLocaleString('it-IT') + ' ' + (lista.length === 1 ? sing : plur) +
       (lista.length > mostrate ? ' · ne vedi ' + mostrate.toLocaleString('it-IT') : '');
     altri.hidden = lista.length <= mostrate;
   }
