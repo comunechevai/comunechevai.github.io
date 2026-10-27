@@ -102,6 +102,7 @@ def pagina_video(v, s, uscita):
     for k in ('csv', 'xlsx') + (('zone',) if zonale else ()):
         shutil.copy2(os.path.join(src, s['file'][k]), os.path.join(dest, s['file'][k]))
     sing, plur = s.get('parola', ['comune', 'comuni'])
+    T = s.get('testi', {})        # frasi su misura per le pagine con zone (es. province); se mancano, quelle dei CAP
     col0, col1, col2 = s.get('colonne', ['Codice ISTAT', 'Comune', 'Provincia'])
 
     unita = f" ({s['unita']})" if s.get('unita') else ''
@@ -122,19 +123,22 @@ def pagina_video(v, s, uscita):
     dati_pag = dict(con_valori=s['con_valori'], fasce=s['fasce'], colori=colori, comuni=s['comuni'],
                     unita=s.get('unita', ''), indicatore=s['indicatore'], cartella=c)
     if zonale:
-        dati_pag.update(livello=s['livello'], parola=[sing, plur], colonne=[col0, col1, col2])
+        dati_pag.update(livello=s['livello'], parola=[sing, plur], colonne=[col0, col1, col2], testi=T)
     # mappa interattiva: c'è se esiste il file dei confini (sito/geometrie_sito.py)
     con_mappa = zonale or os.path.exists(os.path.join(QUI, 'assets', 'comuni_2026.js'))
     if con_mappa and s['n_senza_dato']:
         fasce += '<li><i style="background:#a3a7b0"></i>dato non disponibile</li>'
     legenda = f'<ul class="fasce" aria-label="Fasce di colore della mappa">{fasce}</ul>'
     luogo = s.get('luogo', '')
-    descr_mappa = f'dei {plur} di {luogo}' if zonale else 'dei comuni italiani'
+    descr_mappa = T.get('descr_mappa') or (f'dei {plur} di {luogo}' if zonale else 'dei comuni italiani')
     torna = e(f'Torna a tutta {luogo}') if zonale else "Torna all'Italia intera"
     sigla = luogo[:3].upper() if zonale else 'ITA'
     nota_zone = (' Le linee scure sono i confini dei ' + s.get('contorni', '') + '.') if zonale and s.get('contorni') else ''
+    if T.get('nota_mappa'):
+        nota_zone = ' ' + T['nota_mappa']
+    tocca_mappa = T.get('tocca') or f'Tocca un {sing} per vedere il suo valore'
     sezione_mappa = f'''<section class="sezione" aria-labelledby="t-mappa"><h2 id="t-mappa">La mappa</h2>
-<p class="nota">Gli stessi colori del video. Tocca un {e(sing)} per vedere il suo valore; ingrandisci con due dita sul telefono, con Ctrl + rotellina o con i pulsanti sul computer.{nota_zone}</p>
+<p class="nota">Gli stessi colori del video. {e(tocca_mappa.rstrip('.'))}; ingrandisci con due dita sul telefono, con Ctrl + rotellina o con i pulsanti sul computer.{nota_zone}</p>
 {legenda}
 <div class="mappa-box" id="mappa">
 <canvas role="img" aria-label="Mappa {e(descr_mappa)} colorati per {e(s['indicatore'].lower())}. I valori sono anche nella tabella qui sotto."></canvas>
@@ -151,9 +155,10 @@ def pagina_video(v, s, uscita):
         script_mappa = (f'<script src="../../{ver("d3.min.js")}"></script>\n<script src="../../{ver("comuni_2026.js")}"></script>\n'
                         f'<script src="../../{ver("mappa.js")}"></script>\n') if con_mappa else ''
     if zonale:
-        elenco_nota = f"{format_it(s['n_comuni'])} {plur} di {luogo}."
+        elenco_nota = T.get('elenco_nota') or f"{format_it(s['n_comuni'])} {plur} di {luogo}."
         tocca = '; tocca una riga per vederla sulla mappa'
-        cerca_label, cerca_ph = f'Cerca il tuo {sing} o quartiere', f'{sing} o nome del quartiere'
+        cerca_label = T.get('cerca_label', f'Cerca il tuo {sing} o quartiere')
+        cerca_ph = T.get('cerca_ph', f'{sing} o nome del quartiere')
     else:
         elenco_nota = (f"{format_it(s['n_comuni'])} comuni con i codici ISTAT 2026"
                        f"{(', ' + str(s['n_senza_dato']) + ' senza dato') if s['n_senza_dato'] else ''}.")
@@ -179,8 +184,8 @@ def pagina_video(v, s, uscita):
 <dt>Limiti</dt><dd>{e(s['limiti'])}</dd>
 <dt>Valori per {e(sing)}</dt><dd>{e(valori)}</dd>
 </dl></section>
-{sezione_mappa}<section class="sezione" aria-labelledby="t-comuni"><h2 id="t-comuni">Tutti i {e(plur)}</h2>
-<p class="nota">{elenco_nota} In evidenza quelli citati nel video. Tocca il nome di una colonna per ordinare{tocca if con_mappa else ""}.</p>
+{sezione_mappa}<section class="sezione" aria-labelledby="t-comuni"><h2 id="t-comuni">{e(T.get('titolo_elenco', f'Tutti i {plur}'))}</h2>
+<p class="nota">{elenco_nota} {e(T.get('evidenza', 'In evidenza quelli citati nel video.'))} Tocca il nome di una colonna per ordinare{tocca if con_mappa else ""}.</p>
 {"" if con_mappa else legenda}
 <div class="cerca"><label for="cerca">{e(cerca_label)}</label><input id="cerca" type="search" placeholder="{e(cerca_ph)}" autocomplete="off">
 <span class="conteggio" id="conteggio" aria-live="polite"></span></div>
@@ -188,11 +193,11 @@ def pagina_video(v, s, uscita):
 <th data-col="1" aria-sort="ascending"><button type="button">{e(col1)}</button></th><th data-col="2"><button type="button">{e(col2)}</button></th>{th_val}
 <th data-col="4"><button type="button">Fascia</button></th><th data-col="0"><button type="button">{e(col0)}</button></th>
 </tr></thead><tbody id="corpo"></tbody></table></div>
-<button class="bottone altri" id="altri" type="button" hidden>Mostra altri comuni</button>
+<button class="bottone altri" id="altri" type="button" hidden>{e(T.get('altri', 'Mostra altri comuni'))}</button>
 </section>
 <section class="sezione" aria-labelledby="t-numeri"><h2 id="t-numeri">Numeri del video</h2>
 <p class="nota">Ogni numero mostrato o detto nel video.</p>
-<div class="tabella-box"><table><thead><tr><th>Cosa</th><th>{"Zona" if zonale else "Comune"}</th><th class="num">Valore</th><th>Nota</th></tr></thead>
+<div class="tabella-box"><table><thead><tr><th>Cosa</th><th>{e(T.get('colonna_numeri', 'Zona')) if zonale else "Comune"}</th><th class="num">Valore</th><th>Nota</th></tr></thead>
 <tbody>{numeri}</tbody></table></div></section>
 <script type="application/json" id="dati">{json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")}</script>
 <script src="../../{ver('tabella.js')}"></script>

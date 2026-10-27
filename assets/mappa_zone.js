@@ -16,6 +16,7 @@
   const colore = (nome, riserva) => (css.getPropertyValue(nome).trim() || riserva);
   const MANCA = '#a3a7b0';
   const parola = (D.parola && D.parola[0]) || 'zona';
+  const T = D.testi || {};   // frasi della pagina (es. province: «Tocca una provincia…», nome prima della sigla)
 
   function tracciato(anelli) {
     const p = new Path2D();
@@ -120,9 +121,9 @@
   function mostra(z) {
     scelto = z;
     info.innerHTML = '';
-    if (!z || !z.riga) { info.append(testo('p', 'nota', 'Tocca un ' + parola + ' per vedere il suo valore.')); ridisegna(); return; }
+    if (!z || !z.riga) { info.append(testo('p', 'nota', T.tocca || ('Tocca un ' + parola + ' per vedere il suo valore.'))); ridisegna(); return; }
     const r = z.riga;
-    info.append(testo('p', 'mappa-nome', parola + ' ' + r[0] + (r[1] ? ' · ' + r[1] : '')));
+    info.append(testo('p', 'mappa-nome', T.nome_prima ? r[1] + ' (' + r[0] + ')' : parola + ' ' + r[0] + (r[1] ? ' · ' + r[1] : '')));
     const dett = [];
     if (r[3] != null) dett.push(fmt.format(r[3]) + (D.unita ? ' ' + D.unita : ''));
     dett.push(r[4] == null ? 'dato non disponibile' : 'fascia: ' + D.fasce[r[4] - 1].testo);
