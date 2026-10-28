@@ -158,6 +158,10 @@
     info.append(tit);
     const dett = [];
     if (D.con_valori && r[3] != null) dett.push(fmt.format(r[3]) + (D.unita ? ' ' + D.unita : ''));
+    (D.altre || []).forEach((a, i) => {
+      const v = r[7 + i];
+      if (v != null && v !== '') dett.push(fmt.format(v) + (a.unita === '%' ? '%' : (a.unita ? ' ' + a.unita : '')) + (a.breve ? ' ' + a.breve : ''));
+    });
     dett.push(r[4] == null ? 'dato non disponibile' : 'fascia: ' + D.fasce[r[4] - 1].testo);
     if (r[5]) dett.push('citato nel video');
     info.append(testo('p', 'nota', dett.join(' · ')));

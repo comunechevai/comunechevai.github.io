@@ -120,8 +120,11 @@ def pagina_video(v, s, uscita):
     colori = s.get('colori', [])
     fasce = ''.join(f'<li><i style="background:{c}"></i>{e(f["testo"])}</li>' for f, c in zip(s['fasce'], colori))
     th_val = f'<th class="num" data-col="3"><button type="button">Valore{e(unita)}</button></th>' if s['con_valori'] else ''
+    altre = s.get('altre', [])          # colonne in piu' (toolkit/mappe/esporta.py, ALTRE_COLONNE con sito=True)
+    th_val += ''.join(f'<th class="num" data-col="{7 + i}"><button type="button">{e(a["titolo"])}</button></th>'
+                      for i, a in enumerate(altre))
     dati_pag = dict(con_valori=s['con_valori'], fasce=s['fasce'], colori=colori, comuni=s['comuni'],
-                    unita=s.get('unita', ''), indicatore=s['indicatore'], cartella=c)
+                    unita=s.get('unita', ''), indicatore=s['indicatore'], cartella=c, altre=altre)
     if zonale:
         dati_pag.update(livello=s['livello'], parola=[sing, plur], colonne=[col0, col1, col2], testi=T)
     # mappa interattiva: c'è se esiste il file dei confini (sito/geometrie_sito.py)

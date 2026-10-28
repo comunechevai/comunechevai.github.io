@@ -16,6 +16,8 @@
   let ordine = { col: 0, verso: 1 };
   // righe: [codice, comune, provincia, valore, fascia, nel_video]
   // r[6] (facoltativo, pagine con zone): altri nomi su cui cercare, es. tutti i quartieri di un CAP
+  // r[7], r[8]... (facoltativi): colonne in piu' descritte in D.altre, es. la quota di territorio coperto
+  const altre = D.altre || [];
   const righe = D.comuni.map((r) => ({ r, chiave: (r[1] + ' ' + r[2] + ' ' + r[0] + ' ' + (r[6] || '')).toLocaleLowerCase('it') }));
 
   function cella(testo, classe) {
@@ -53,6 +55,10 @@
       }
       tr.appendChild(cella(r[2]));
       if (conValori) tr.appendChild(cella(r[3] === null ? '—' : fmt.format(r[3]), 'num'));
+      altre.forEach((a, i) => {
+        const v = r[7 + i];
+        tr.appendChild(cella(v === null || v === undefined ? '—' : fmt.format(v), 'num'));
+      });
       const f = r[4];
       const td = cella(f === null ? 'dato non disponibile' : fasce[f - 1].testo, 'testo');
       if (f !== null && colori[f - 1]) {
@@ -76,7 +82,7 @@
   document.querySelectorAll('th[data-col]').forEach((th) => {
     th.querySelector('button').addEventListener('click', () => {
       const col = Number(th.dataset.col);
-      ordine = { col, verso: ordine.col === col ? -ordine.verso : (col === 3 || col === 4 ? -1 : 1) };
+      ordine = { col, verso: ordine.col === col ? -ordine.verso : (col === 3 || col === 4 || col >= 7 ? -1 : 1) };
       document.querySelectorAll('th[data-col]').forEach((h) => h.removeAttribute('aria-sort'));
       th.setAttribute('aria-sort', ordine.verso === 1 ? 'ascending' : 'descending');
       disegna();
