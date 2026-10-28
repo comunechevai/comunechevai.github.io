@@ -41,6 +41,7 @@ Ogni pagina video ha la sezione «La mappa»: stessi colori e legenda del video,
 - `assets/comuni_2026.js`: confini dei 7.896 comuni (codici ISTAT 2026), semplificati senza buchi tra comuni vicini, circa 470 KB scaricati e poi tenuti in memoria dal browser. Si rifà solo se cambiano i confini: `python sito/geometrie_sito.py <mapshaper>` (vedi l'intestazione dello script).
 - `assets/mappa.js` disegna la mappa; `assets/d3.min.js` (D3 7.9.0) serve per lo zoom.
 - Dopo ogni pubblicazione: aprire la pagina del video, controllare che colori e legenda siano quelli del video e toccare un paio di comuni.
+- **Colonne in più** (dal video 06): in `dati.py` una voce di `ALTRE_COLONNE` con `sito=True` (e `unita`, `breve`) compare anche nella tabella del sito, ordinabile, e nel riquadro della mappa (es. «91,9% coperto» accanto ai metri quadri a testa). `scheda.json` la descrive in `altre`; nelle righe dei comuni i valori stanno dalla posizione 7. Le altre colonne restano solo in CSV ed Excel.
 - **Video con zone sotto il comune** (es. il 04, i CAP di Milano): `render.py --esporta` usa `toolkit/mappe/esporta_zone.py` e scrive anche `dati_pubblici/zone.js` (confini delle zone e dei municipi, semplificati senza buchi tra zone vicine). `costruisci.py` lo riconosce dal campo `livello` di `scheda.json`: copia `zone.js` nella cartella della pagina e usa `assets/mappa_zone.js` al posto di `mappa.js`; tabella, ricerca e testi parlano di CAP invece che di comuni. Le pagine dei comuni restano identiche.
 
 ## Statistiche delle visite
