@@ -8,6 +8,8 @@ sito/video.json è l'elenco dei video pubblicati, dal più vecchio al più nuovo
     [{"cartella": "05_polo", "pubblicato": "2026-11-03",
       "instagram": "https://www.instagram.com/reel/...", "tiktok": "https://...", "youtube": "https://..."}]
 Titolo, fonte, metodo e dati arrivano da video/<cartella>/dati_pubblici/ (render.py --esporta).
+Se la scheda.json del video ha "tipo": "settori" (confronto tra settori economici, non tra comuni) la pagina è quella dei settori
+(pagina_settori, assets/tabella_settori.js): tabella ricercabile dei settori Ateco, senza mappa.
 
 sito/caroselli.json è l'elenco dei caroselli pubblicati (sezione «Caroselli» della pagina principale):
     [{"cartella": "2026-10-26_ecosistema-urbano", "pubblicato": "2026-10-26", "titolo": "...",
@@ -168,6 +170,7 @@ def pagina_video(v, s, uscita):
         tocca = '; tocca un comune per vederlo sulla mappa'
         cerca_label, cerca_ph = 'Cerca il tuo comune', 'Nome o sigla della provincia'
 
+    dati_json = json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")     # fuori dall'f-string: compatibile con Python 3.10
     corpo = testa(f"{s['titolo']} · Comune che vai", f"Fonte, metodo e dati {sing} per {sing} del video «{s['titolo']}».", '../../')
     corpo += f'''<a class="indietro" href="../../index.html">← Tutti i video</a>
 <header class="intro"><h1>{e(s['titolo'])}</h1>
@@ -202,9 +205,77 @@ def pagina_video(v, s, uscita):
 <p class="nota">Ogni numero mostrato o detto nel video.</p>
 <div class="tabella-box"><table><thead><tr><th>Cosa</th><th>{e(T.get('colonna_numeri', 'Zona')) if zonale else "Comune"}</th><th class="num">Valore</th><th>Nota</th></tr></thead>
 <tbody>{numeri}</tbody></table></div></section>
-<script type="application/json" id="dati">{json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")}</script>
+<script type="application/json" id="dati">{dati_json}</script>
 <script src="../../{ver('tabella.js')}"></script>
 {script_mappa}'''
+    corpo += piede()
+    open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
+
+
+def pagina_settori(v, s, uscita):
+    """Pagina di un video che confronta settori economici (scheda.json con tipo «settori»): tabella dei settori Ateco, nessuna mappa."""
+    dest = os.path.join(uscita, 'video', v['cartella'])
+    os.makedirs(dest, exist_ok=True)
+    src = os.path.join(ROOT, 'video', v['cartella'], 'dati_pubblici')
+    for k in ('csv', 'xlsx'):
+        shutil.copy2(os.path.join(src, s['file'][k]), os.path.join(dest, s['file'][k]))
+    c = v['cartella']
+    guarda = ''.join(f'<a class="bottone" href="{e(v[k])}"{clic(f"guarda-{k}-{c}", f"Guarda su {n} · {c}")}>{ICONA_FUORI}Guarda su {n}</a>'
+                     for k, n in (('instagram', 'Instagram'), ('tiktok', 'TikTok'), ('youtube', 'YouTube')) if v.get(k))
+    pub = f" · pubblicato il {data_it(v['pubblicato'])}" if v.get('pubblicato') else ''
+    numeri = ''.join(
+        f'<tr><td class="testo">{e(n["cosa"])}</td><td class="num">{e(format_it(n["valore"]))} {e(n["unita"])}</td>'
+        f'<td class="testo">{e(n["nota"])}</td></tr>' for n in s['numeri'])
+    # righe della tabella: [codice, settore, occupati, valore per occupato, paga oraria, quota personale, % dipendenti, nel confronto, nel video]
+    righe = []
+    for cod, nome, occ, dip, va, sal, cp, ore, vpo, paga, quota, conf, nelv in s['settori']:
+        if vpo is None and paga is None and quota is None:
+            continue
+        pdip = round(dip * 100 / occ) if occ and dip is not None else None
+        righe.append([cod, nome, occ, vpo, paga, quota, pdip, 1 if conf == 'sì' else 0, 1 if nelv else 0])
+    n_conf = sum(r[7] for r in righe)
+    n_senza = len(s['settori']) - len(righe)
+    dati_pag = dict(righe=righe, cartella=c)
+    dati_json = json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")     # fuori dall'f-string: compatibile con Python 3.10
+    corpo = testa(f"{s['titolo']} · Comune che vai", f"Fonte, metodo e dati settore per settore del video «{s['titolo']}».", '../../')
+    corpo += f'''<a class="indietro" href="../../index.html">← Tutti i video</a>
+<header class="intro"><h1>{e(s['titolo'])}</h1>
+<div class="meta"><span>Video {e(s['numero'])}{pub}</span><span>Dati aggiornati il {data_it(s['generato_il'])}</span></div></header>
+<div class="azioni">
+<a class="bottone pieno" href="{e(s['file']['xlsx'])}" download{clic(f"scarica-excel-{c}", f"Scarica Excel · {c}")}>{ICONA_SCARICA}Scarica Excel</a>
+<a class="bottone" href="{e(s['file']['csv'])}" download{clic(f"scarica-csv-{c}", f"Scarica CSV · {c}")}>{ICONA_SCARICA}Scarica CSV</a>
+<a class="bottone" href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>{ICONA_FUORI}Fonte originale</a>{guarda}
+</div>
+<section class="sezione" aria-labelledby="t-scheda"><h2 id="t-scheda">Da dove vengono i numeri</h2>
+<dl class="scheda">
+<dt>Indicatori</dt><dd>{e(s['indicatore'])}</dd>
+<dt>Fonte</dt><dd><a href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>{e(s['fonte'])}</a></dd>
+<dt>Anno dei dati</dt><dd>{e(s['anno'])}</dd>
+<dt>Come è calcolato</dt><dd>{e(s['metodo'])}</dd>
+<dt>Confronti</dt><dd>{e(s['soglia'])}</dd>
+<dt>Limiti</dt><dd>{e(s['limiti'])}</dd>
+<dt>Dati per settore</dt><dd>Sì: per ogni settore Ateco a 4 cifre ci sono occupati, dipendenti, valore aggiunto, salari, costi del personale e ore lavorate, più i tre indicatori. Dove l'ISTAT non pubblica il dato la cella è vuota.</dd>
+</dl></section>
+<section class="sezione" aria-labelledby="t-settori"><h2 id="t-settori">Tutti i settori</h2>
+<p class="nota">{format_it(len(righe))} settori Ateco a 4 cifre con almeno un dato ({format_it(n_senza)} senza dato). Di partenza vedi i {n_conf} settori del confronto, cioè quelli con più di 100.000 occupati (esclusi gli affitti di immobili); togli la spunta per vederli tutti (fuori dal confronto ci sono settori piccoli, dove pochi casi possono pesare molto sulle medie: leggi quei valori con cautela). In evidenza i settori citati nel video. Tocca il nome di una colonna per ordinare.</p>
+<div class="cerca"><label for="cerca">Cerca il tuo settore</label><input id="cerca" type="search" placeholder="Nome o codice Ateco" autocomplete="off">
+<label class="spunta"><input id="solo" type="checkbox" checked> Solo i settori con più di 100.000 occupati</label>
+<span class="conteggio" id="conteggio" aria-live="polite"></span></div>
+<div class="tabella-box"><table><thead><tr>
+<th data-col="1"><button type="button">Settore</button></th><th data-col="0"><button type="button">Codice Ateco</button></th>
+<th class="num" data-col="2"><button type="button">Occupati</button></th><th class="num" data-col="6"><button type="button">Dipendenti sugli occupati (%)</button></th>
+<th class="num" data-col="3" aria-sort="descending"><button type="button">Valore per occupato (€)</button></th><th class="num" data-col="4"><button type="button">Paga lorda oraria (€)</button></th>
+<th class="num" data-col="5"><button type="button">Quota agli stipendi (% del valore)</button></th>
+</tr></thead><tbody id="corpo"></tbody></table></div>
+<button class="bottone altri" id="altri" type="button" hidden>Mostra altri settori</button>
+</section>
+<section class="sezione" aria-labelledby="t-numeri"><h2 id="t-numeri">Numeri del video</h2>
+<p class="nota">Ogni numero mostrato o detto nel video.</p>
+<div class="tabella-box"><table><thead><tr><th>Cosa</th><th class="num">Valore</th><th>Nota</th></tr></thead>
+<tbody>{numeri}</tbody></table></div></section>
+<script type="application/json" id="dati">{dati_json}</script>
+<script src="../../{ver('tabella_settori.js')}"></script>
+'''
     corpo += piede()
     open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
 
@@ -294,7 +365,7 @@ def main():
     voci = []
     for v in elenco:
         _, s = carica(v['cartella'])
-        pagina_video(v, s, uscita)
+        (pagina_settori if s.get('tipo') == 'settori' else pagina_video)(v, s, uscita)
         voci.append((v, s))
     pc = os.path.join(QUI, 'caroselli.json')
     caroselli = json.load(open(pc, encoding='utf-8')) if os.path.exists(pc) else []

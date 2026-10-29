@@ -100,6 +100,8 @@ td.num, th.num { text-align: right; }
 tr.citato td { background: var(--riga); font-weight: 600; }
 .cerca { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
 .cerca label { font-weight: 600; }
+.cerca label.spunta { font-weight: 400; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.cerca label.spunta input { width: 18px; min-height: 0; height: 18px; padding: 0; accent-color: var(--accento); }
 .cerca input {
   font: inherit; min-height: 44px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--linea);
   background: var(--superficie); color: var(--inchiostro); width: min(320px, 100%);

@@ -44,6 +44,10 @@ Ogni pagina video ha la sezione «La mappa»: stessi colori e legenda del video,
 - **Colonne in più** (dal video 06): in `dati.py` una voce di `ALTRE_COLONNE` con `sito=True` (e `unita`, `breve`) compare anche nella tabella del sito, ordinabile, e nel riquadro della mappa (es. «91,9% coperto» accanto ai metri quadri a testa). `scheda.json` la descrive in `altre`; nelle righe dei comuni i valori stanno dalla posizione 7. Le altre colonne restano solo in CSV ed Excel.
 - **Video con zone sotto il comune** (es. il 04, i CAP di Milano): `render.py --esporta` usa `toolkit/mappe/esporta_zone.py` e scrive anche `dati_pubblici/zone.js` (confini delle zone e dei municipi, semplificati senza buchi tra zone vicine). `costruisci.py` lo riconosce dal campo `livello` di `scheda.json`: copia `zone.js` nella cartella della pagina e usa `assets/mappa_zone.js` al posto di `mappa.js`; tabella, ricerca e testi parlano di CAP invece che di comuni. Le pagine dei comuni restano identiche.
 
+## Video che confrontano settori (non comuni)
+
+Se la `scheda.json` del video ha `"tipo": "settori"` (es. il 07, paga oraria e valore creato per settore Ateco a 4 cifre), `costruisci.py` scrive la pagina dei settori al posto di quella dei comuni: stessa scheda (fonte, metodo, soglia, limiti), numeri del video e una tabella ricercabile e ordinabile dei settori (`assets/tabella_settori.js`), con la spunta «Solo i settori con più di 100.000 occupati» attiva di partenza. Niente mappa. I dati arrivano dal campo `settori` di `scheda.json` (le righe del CSV).
+
 ## Statistiche delle visite
 
 Il sito usa **GoatCounter** (senza cookie, quindi senza banner): cruscotto su https://comunechevai.goatcounter.com, con l'account del progetto. `costruisci.py` mette lo script in ogni pagina e conta come eventi i click su «Scarica Excel», «Scarica CSV», «Fonte originale», «Guarda su…» e sui profili social (nomi tipo `scarica-excel-01_eta`); conta anche, una volta per visita, chi usa la mappa (`mappa-01_eta`).
