@@ -44,6 +44,22 @@ Ogni pagina video ha la sezione «La mappa»: stessi colori e legenda del video,
 - **Colonne in più** (dal video 06): in `dati.py` una voce di `ALTRE_COLONNE` con `sito=True` (e `unita`, `breve`) compare anche nella tabella del sito, ordinabile, e nel riquadro della mappa (es. «91,9% coperto» accanto ai metri quadri a testa). `scheda.json` la descrive in `altre`; nelle righe dei comuni i valori stanno dalla posizione 7. Le altre colonne restano solo in CSV ed Excel.
 - **Video con zone sotto il comune** (es. il 04, i CAP di Milano): `render.py --esporta` usa `toolkit/mappe/esporta_zone.py` e scrive anche `dati_pubblici/zone.js` (confini delle zone e dei municipi, semplificati senza buchi tra zone vicine). `costruisci.py` lo riconosce dal campo `livello` di `scheda.json`: copia `zone.js` nella cartella della pagina e usa `assets/mappa_zone.js` al posto di `mappa.js`; tabella, ricerca e testi parlano di CAP invece che di comuni. Le pagine dei comuni restano identiche.
 
+### Video con mappa per regione
+
+Se la `scheda.json` ha `"livello": "regione"` (il 10 · Calcio), `costruisci.py` scrive la pagina delle regioni
+(`pagina_regioni`): stessa scheda e stessi numeri del video, ma la mappa usa i confini delle venti regioni
+(`assets/regioni_2026.js`, disegnata da `assets/mappa_regioni.js`) e al posto dei 7.896 comuni c'è una tabella
+fissa di venti righe con la sola fascia di colore, senza ricerca. Serve per i video di cui si pubblica la mappa
+regionale ma non il valore di ogni comune: il campo `nota_livello` della scheda spiega al lettore perché.
+I confini si rifanno solo se cambiano: `python sito/geometrie_regioni.py <mapshaper>` (24 KB, venti forme).
+
+### Cartella sorgente diversa da quella pubblicata
+
+In `video.json` una voce può avere `sorgente`: il nome della cartella in `video/` da cui leggere i dati, quando
+è diverso dall'indirizzo già pubblicato. Serve al 04, la cui cartella di lavoro è diventata
+`video/04_stessa_citta_milano` quando è arrivato Palermo, mentre la pagina resta su `/video/04_stessa_citta/`
+perché il link è già in giro.
+
 ## Video che confrontano settori (non comuni)
 
 Se la `scheda.json` del video ha `"tipo": "settori"` (es. il 07, paga oraria e valore creato per settore Ateco a 4 cifre), `costruisci.py` scrive la pagina dei settori al posto di quella dei comuni: stessa scheda (fonte, metodo, soglia, limiti), numeri del video e una tabella ricercabile e ordinabile dei settori (`assets/tabella_settori.js`), con la spunta «Solo i settori con più di 100.000 occupati» attiva di partenza. Niente mappa. I dati arrivano dal campo `settori` di `scheda.json` (le righe del CSV).

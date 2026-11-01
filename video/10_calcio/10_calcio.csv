@@ -1,0 +1,21 @@
+regione,fascia,fascia_da,fascia_a,fascia_testo,nel_video
+Abruzzo,7,7.8,9,"da 7,8 a meno di 9 punti per 1.000",
+Basilicata,9,11,,11 punti per 1.000 e oltre,sì
+Calabria,4,5.3,5.77,"da 5,3 a meno di 5,77 punti per 1.000",
+Campania,2,4,4.7,"da 4 a meno di 4,7 punti per 1.000",
+Emilia-Romagna,6,6.6,7.8,"da 6,6 a meno di 7,8 punti per 1.000",
+Friuli-Venezia Giulia,6,6.6,7.8,"da 6,6 a meno di 7,8 punti per 1.000",
+Lazio,2,4,4.7,"da 4 a meno di 4,7 punti per 1.000",
+Liguria,8,9,11,da 9 a meno di 11 punti per 1.000,sì
+Lombardia,3,4.7,5.3,"da 4,7 a meno di 5,3 punti per 1.000",sì
+Marche,7,7.8,9,"da 7,8 a meno di 9 punti per 1.000",
+Molise,9,11,,11 punti per 1.000 e oltre,sì
+Piemonte,4,5.3,5.77,"da 5,3 a meno di 5,77 punti per 1.000",
+Puglia,1,,4,meno di 4 punti per 1.000,
+Sardegna,7,7.8,9,"da 7,8 a meno di 9 punti per 1.000",sì
+Sicilia,1,,4,meno di 4 punti per 1.000,sì
+Toscana,6,6.6,7.8,"da 6,6 a meno di 7,8 punti per 1.000",
+Trentino-Alto Adige/Südtirol,7,7.8,9,"da 7,8 a meno di 9 punti per 1.000",
+Umbria,8,9,11,da 9 a meno di 11 punti per 1.000,
+Valle d'Aosta/Vallée d'Aoste,1,,4,meno di 4 punti per 1.000,
+Veneto,5,5.77,6.6,"da 5,77 a meno di 6,6 punti per 1.000",

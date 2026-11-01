@@ -99,7 +99,7 @@ def carica(cartella):
 def pagina_video(v, s, uscita):
     dest = os.path.join(uscita, 'video', v['cartella'])
     os.makedirs(dest, exist_ok=True)
-    src = os.path.join(ROOT, 'video', v['cartella'], 'dati_pubblici')
+    src = os.path.join(ROOT, 'video', v.get('sorgente', v['cartella']), 'dati_pubblici')
     zonale = s.get('livello', 'comune') != 'comune'      # zone sotto il comune (es. CAP): toolkit/mappe/esporta_zone.py
     for k in ('csv', 'xlsx') + (('zone',) if zonale else ()):
         shutil.copy2(os.path.join(src, s['file'][k]), os.path.join(dest, s['file'][k]))
@@ -212,11 +212,91 @@ def pagina_video(v, s, uscita):
     open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
 
 
+def pagina_regioni(v, s, uscita):
+    """Pagina di un video con mappa per regione (scheda.json con livello «regione»: il 10 · Calcio).
+
+    Di questi video si pubblicano le venti righe regionali e la fascia di colore, non il valore
+    di ogni comune: la tabella e' corta e fissa, senza ricerca, e la mappa usa i confini delle
+    regioni (assets/regioni_2026.js, assets/mappa_regioni.js).
+    """
+    dest = os.path.join(uscita, 'video', v['cartella'])
+    os.makedirs(dest, exist_ok=True)
+    src = os.path.join(ROOT, 'video', v.get('sorgente', v['cartella']), 'dati_pubblici')
+    for k in ('csv', 'xlsx'):
+        shutil.copy2(os.path.join(src, s['file'][k]), os.path.join(dest, s['file'][k]))
+    c = v['cartella']
+    unita = f" ({s['unita']})" if s.get('unita') else ''
+    guarda = ''.join(f'<a class="bottone" href="{e(v[k])}"{clic(f"guarda-{k}-{c}", f"Guarda su {n} · {c}")}>{ICONA_FUORI}Guarda su {n}</a>'
+                     for k, n in (('instagram', 'Instagram'), ('tiktok', 'TikTok'), ('youtube', 'YouTube')) if v.get(k))
+    pub = f" · pubblicato il {data_it(v['pubblicato'])}" if v.get('pubblicato') else ''
+    numeri = ''.join(
+        f'<tr><td class="testo">{e(n["cosa"])}</td><td class="testo">{e(n["comune"] + (" (" + n["provincia"] + ")" if n["provincia"] else ""))}</td>'
+        f'<td class="num">{e(format_it(n["valore"]))} {e(n["unita"])}</td><td class="testo">{e(n["nota"])}</td></tr>'
+        for n in s['numeri'])
+    colori = s.get('colori', [])
+    fasce_li = ''.join(f'<li><i style="background:{col}"></i>{e(f["testo"])}</li>' for f, col in zip(s['fasce'], colori))
+    legenda = f'<ul class="fasce" aria-label="Fasce di colore della mappa">{fasce_li}</ul>'
+    testi_fascia = {f['fascia']: f['testo'] for f in s['fasce']}
+    CITATA = ' class="citato"'      # fuori dall'f-string: niente barre rovesciate dentro (Python 3.10)
+    righe = ''.join(
+        f'<tr{CITATA if nel else ""}><td class="testo">{e(nome)}</td>'
+        f'<td class="testo"><i class="pallino" style="background:{colori[fascia - 1]}"></i>{e(testi_fascia[fascia])}</td>'
+        f'<td class="testo">{"sì" if nel else ""}</td></tr>'
+        for nome, fascia, nel in sorted(s['regioni'], key=lambda r: -r[1]))
+    dati_pag = dict(regioni=s['regioni'], fasce=s['fasce'], colori=colori, cartella=c)
+    dati_json = json.dumps(dati_pag, ensure_ascii=False).replace("</", "<\\/")
+    corpo = testa(f"{s['titolo']} · Comune che vai",
+                  f"Fonte, metodo e dati regione per regione del video «{s['titolo']}».", '../../')
+    corpo += f'''<a class="indietro" href="../../index.html">← Tutti i video</a>
+<header class="intro"><h1>{e(s['titolo'])}</h1>
+<div class="meta"><span>Video {e(s['numero'])}{pub}</span><span>Dati aggiornati il {data_it(s['generato_il'])}</span></div></header>
+<div class="azioni">
+<a class="bottone pieno" href="{e(s['file']['xlsx'])}" download{clic(f"scarica-excel-{c}", f"Scarica Excel · {c}")}>{ICONA_SCARICA}Scarica Excel</a>
+<a class="bottone" href="{e(s['file']['csv'])}" download{clic(f"scarica-csv-{c}", f"Scarica CSV · {c}")}>{ICONA_SCARICA}Scarica CSV</a>
+<a class="bottone" href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>{ICONA_FUORI}Fonte originale</a>{guarda}
+</div>
+<section class="sezione" aria-labelledby="t-scheda"><h2 id="t-scheda">Da dove vengono i numeri</h2>
+<dl class="scheda">
+<dt>Indicatore</dt><dd>{e(s['indicatore'] + unita)}</dd>
+<dt>Fonte</dt><dd><a href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>{e(s['fonte'])}</a></dd>
+<dt>Anno dei dati</dt><dd>{e(s['anno'])}</dd>
+<dt>Come è calcolato</dt><dd>{e(s['metodo'])}</dd>
+<dt>Classifiche</dt><dd>{e(s['soglia'])}</dd>
+<dt>Limiti</dt><dd>{e(s['limiti'])}</dd>
+<dt>Dettaglio pubblicato</dt><dd>{e(s.get('nota_livello', ''))}</dd>
+</dl></section>
+<section class="sezione" aria-labelledby="t-mappa"><h2 id="t-mappa">La mappa</h2>
+<p class="nota">Gli stessi colori del video. Tocca una regione per vedere la sua fascia; ingrandisci con due dita sul telefono, con Ctrl + rotellina o con i pulsanti sul computer.</p>
+{legenda}
+<div class="mappa-box" id="mappa">
+<canvas role="img" aria-label="Mappa delle regioni italiane colorate per {e(s['indicatore'].lower())}. Le fasce sono anche nella tabella qui sotto."></canvas>
+<div class="mappa-comandi"><button type="button" data-zoom="piu" aria-label="Ingrandisci">+</button><button type="button" data-zoom="meno" aria-label="Rimpicciolisci">−</button><button type="button" class="testo" data-zoom="italia" aria-label="Torna all&#39;Italia intera">ITA</button></div>
+<p class="mappa-avviso" hidden></p>
+</div>
+<div class="mappa-info" id="mappa-info" aria-live="polite"></div>
+</section>
+<section class="sezione" aria-labelledby="t-regioni"><h2 id="t-regioni">Tutte le regioni</h2>
+<p class="nota">Le venti regioni, dalla fascia più alta alla più bassa. In evidenza quelle citate nel video.</p>
+<div class="tabella-box"><table><thead><tr><th>Regione</th><th>Fascia</th><th>Citata nel video</th></tr></thead>
+<tbody>{righe}</tbody></table></div></section>
+<section class="sezione" aria-labelledby="t-numeri"><h2 id="t-numeri">Numeri del video</h2>
+<p class="nota">Ogni numero mostrato o detto nel video.</p>
+<div class="tabella-box"><table><thead><tr><th>Cosa</th><th>Comune</th><th class="num">Valore</th><th>Nota</th></tr></thead>
+<tbody>{numeri}</tbody></table></div></section>
+<script type="application/json" id="dati">{dati_json}</script>
+<script src="../../{ver('d3.min.js')}"></script>
+<script src="../../{ver('regioni_2026.js')}"></script>
+<script src="../../{ver('mappa_regioni.js')}"></script>
+'''
+    corpo += piede()
+    open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
+
+
 def pagina_settori(v, s, uscita):
     """Pagina di un video che confronta settori economici (scheda.json con tipo «settori»): tabella dei settori Ateco, nessuna mappa."""
     dest = os.path.join(uscita, 'video', v['cartella'])
     os.makedirs(dest, exist_ok=True)
-    src = os.path.join(ROOT, 'video', v['cartella'], 'dati_pubblici')
+    src = os.path.join(ROOT, 'video', v.get('sorgente', v['cartella']), 'dati_pubblici')
     for k in ('csv', 'xlsx'):
         shutil.copy2(os.path.join(src, s['file'][k]), os.path.join(dest, s['file'][k]))
     c = v['cartella']
@@ -364,8 +444,13 @@ def main():
         shutil.copytree(os.path.join(QUI, 'assets'), os.path.join(uscita, 'assets'), dirs_exist_ok=True)
     voci = []
     for v in elenco:
-        _, s = carica(v['cartella'])
-        (pagina_settori if s.get('tipo') == 'settori' else pagina_video)(v, s, uscita)
+        _, s = carica(v.get('sorgente', v['cartella']))
+        if s.get('tipo') == 'settori':
+            pagina_settori(v, s, uscita)
+        elif s.get('livello') == 'regione':          # mappa per regione, niente dettaglio per comune
+            pagina_regioni(v, s, uscita)
+        else:
+            pagina_video(v, s, uscita)
         voci.append((v, s))
     pc = os.path.join(QUI, 'caroselli.json')
     caroselli = json.load(open(pc, encoding='utf-8')) if os.path.exists(pc) else []

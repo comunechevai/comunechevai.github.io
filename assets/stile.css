@@ -86,6 +86,7 @@ p { margin: 0; }
 .fasce { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
 .fasce li { display: flex; align-items: center; gap: 6px; }
 .fasce i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; flex: none; box-shadow: 0 0 0 1px var(--linea); }
+i.pallino { width: 14px; height: 14px; border-radius: 3px; display: inline-block; flex: none; box-shadow: 0 0 0 1px var(--linea); margin-right: 8px; vertical-align: -2px; }
 
 .tabella-box { overflow-x: auto; border: 1px solid var(--linea); border-radius: 12px; background: var(--superficie); }
 table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
