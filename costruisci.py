@@ -18,6 +18,11 @@ sito/caroselli.json è l'elenco dei caroselli pubblicati (sezione «Caroselli» 
       "file": ["pedoni_province_2025.csv"],     # facoltativo: dati nuovi, copiati da caroselli/<cartella>/
       "instagram": "...", "tiktok": "...", "youtube": "..."}]
 Classifiche fatte da altri: solo il link alla fonte, senza ricopiarne le tabelle.
+
+Pagina «Il tuo comune in numeri» (comune/index.html + comune/numeri.js, assets/comune.js): per ogni comune i valori di tutti
+i video pubblicati, con il confronto con l'Italia (SCHEDA_COMUNE) e il link alla pagina del video. Si apre solo dal link
+mandato in DM a chi commenta: comune/?rio-saliceto (minuscole, trattini; con omonimi anche la sigla: comune/?castro-le).
+Niente ricerca libera, nessun link dal resto del sito, noindex per i motori di ricerca (decisione di Paolo del 2/11/2026).
 Dopo aver costruito, si pubblica il contenuto di sito/ nel repository GitHub (vedi sito/README.md).
 """
 import datetime
@@ -360,6 +365,112 @@ def pagina_settori(v, s, uscita):
     open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
 
 
+# «Il tuo comune in numeri» (comune/index.html): un comune, i numeri di tutti i video pubblicati.
+# Per ogni video con un valore per comune: decimali e riferimento italiano (la riga dei «Numeri del video» con quel
+# testo). Un video nuovo non in elenco usa 1 decimale e la prima riga dei numeri con «Italia» e la stessa unità.
+SCHEDA_COMUNE = {
+    '01_eta': dict(dec=1, italia='Età media in Italia'),
+    '02_altitudine': dict(dec=0, italia=None),
+    '03_auto': dict(dec=1, italia='Autovetture ogni 100 abitanti in Italia'),
+    '06_suolo': dict(dec=0, italia='Suolo consumato a testa, Italia'),
+    '09_taglio_irpef': dict(dec=1, italia='Quota in Italia'),
+    '11_morti': dict(dec=1, italia='Morti ogni 1.000 abitanti, Italia'),
+    '13_alluvioni': dict(dec=1, italia='Italia, quota dei residenti in zona allagabile'),
+    '14_anziani': dict(dec=1, italia='Anziani per bambino in Italia'),
+    '15_moto_ape': dict(dec=1, italia='Italia: moto ogni 100 abitanti'),
+    '16_arricchiti': dict(dec=1, italia="Italia, variazione al netto dell'inflazione (%)"),
+    '05_pedoni': dict(dec=1, italia='Investimenti di pedone ogni 100.000 abitanti, media italiana'),
+}
+
+
+def _italia(s, cartella):
+    conf = SCHEDA_COMUNE.get(cartella, s.get('scheda_comune', {}))
+    if 'italia' in conf:
+        if conf['italia'] is None:
+            return None
+        trovati = [n['valore'] for n in s['numeri'] if n['cosa'] == conf['italia']]
+        assert len(trovati) == 1, f'{cartella}: riferimento italiano «{conf["italia"]}» non trovato nei numeri del video'
+        return trovati[0]
+    for n in s['numeri']:
+        if 'Italia' in n['cosa'] and n.get('unita') == s.get('unita'):
+            return n['valore']
+    return None
+
+
+def _titolo(s):
+    t = s['titolo']
+    return t if t.startswith(s['numero']) else f"{s['numero']} · {t}"
+
+
+PAGINA_COMUNE = '''<a class="indietro" href="../index.html">← Tutti i video</a>
+<header class="intro"><h1>Il tuo comune in numeri</h1>
+<p>I numeri del tuo comune nei nostri video (@N_VIDEO@ finora), confrontati con l'Italia. Per ogni numero c'è il link alla pagina del video, con fonte, metodo e limiti.</p></header>
+<div id="proposte" hidden></div>
+<section class="sezione scheda-comune" id="scheda" aria-live="polite" hidden></section>
+<script src="numeri.js?v=@V_DATI@"></script>
+<script src="../@JS@"></script>
+'''
+
+
+def pagina_comuni(voci, uscita):
+    import csv
+    import hashlib
+    dest = os.path.join(uscita, 'comune')
+    os.makedirs(dest, exist_ok=True)
+    elenco = list(csv.DictReader(open(os.path.join(ROOT, 'toolkit', 'mappe', 'comuni_2026.csv'), encoding='utf-8')))
+    # comuni in un ordine fisso; i valori di ogni video sono liste nello stesso ordine (file piu' leggero per il telefono)
+    codici = [r['codice'].zfill(6) for r in elenco]
+    pos = {c: i for i, c in enumerate(codici)}
+    comuni = [[r['comune'], r['sigla'], r['regione'], None, r['comune_ufficiale'] if r['comune_ufficiale'] != r['comune'] else '']
+              for r in elenco]
+    per_nome = {r['comune']: r['codice'].zfill(6) for r in elenco}
+    schede, province, regioni, zone, ultima = [], [], [], [], ''
+    for v, s in voci:
+        c = v['cartella']
+        if s.get('tipo') == 'settori':
+            continue
+        href = f'../video/{c}/index.html'
+        ultima = max(ultima, v.get('pubblicato', ''))
+        liv = s.get('livello', 'comune')
+        conf = SCHEDA_COMUNE.get(c, s.get('scheda_comune', {}))
+        base = dict(titolo=_titolo(s), indicatore=s['indicatore'], unita=s.get('unita', ''), href=href,
+                    dec=conf.get('dec', 1))
+        if liv == 'comune':
+            valori = [None] * len(codici)
+            for r in s['comuni']:
+                if r[0] in pos:
+                    valori[pos[r[0]]] = r[3] if s['con_valori'] else r[4]     # senza valori: la fascia (testo in «fasce»)
+            schede.append(dict(base, con_valori=bool(s['con_valori']), italia=_italia(s, c), valori=valori,
+                               fasce={f['fascia']: f['testo'] for f in s['fasce']}))
+            if c == '01_eta':          # abitanti al 1° gennaio 2026 per la testata della scheda
+                f = os.path.join(ROOT, 'video', c, 'dati_pubblici', s['file']['csv'])
+                for r in csv.DictReader(open(f, encoding='utf-8')):
+                    if r['codice_istat'] in pos and r['abitanti']:
+                        comuni[pos[r['codice_istat']]][3] = int(float(r['abitanti']))
+        elif liv == 'provincia':
+            province.append(dict(base, italia=_italia(s, c), valori={r[0]: r[3] for r in s['comuni'] if r[3] is not None}))
+        elif liv == 'regione':
+            f = os.path.join(ROOT, 'video', c, 'dati_pubblici', s['file']['csv'])
+            regioni.append(dict(base, valori={r['regione']: r['fascia_testo'] for r in csv.DictReader(open(f, encoding='utf-8'))}))
+        elif s.get('luogo') in per_nome:      # zone dentro una città (CAP): link alla pagina del video
+            zone.append(dict(comune=pos[per_nome[s['luogo']]], titolo=_titolo(s), indicatore=s['indicatore'], href=href))
+    dati = dict(aggiornato=data_it(ultima) if ultima else '', schede=schede, province=dict(schede=province),
+                regioni=regioni, zone=zone, comuni=comuni)
+    js = 'window.NUMERI_COMUNI=' + json.dumps(dati, ensure_ascii=False, separators=(',', ':')) + ';\n'
+    open(os.path.join(dest, 'numeri.js'), 'w', encoding='utf-8').write(js)
+    n_video = len(schede) + len(province) + len(regioni) + len(zone)
+    corpo = testa('Il tuo comune in numeri · Comune che vai',
+                  'I numeri del tuo comune in tutti i video di Comune che vai.', '../')
+    # raggiungibile solo dal link mandato in DM: niente link dal sito, niente motori di ricerca
+    corpo = corpo.replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1)
+    corpo += (PAGINA_COMUNE.replace('@N_VIDEO@', str(n_video))
+              .replace('@V_DATI@', hashlib.md5(js.encode('utf-8')).hexdigest()[:8])
+              .replace('@JS@', ver('comune.js')))
+    corpo += piede()
+    open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
+    return len(comuni), n_video
+
+
 def format_it(x):
     if x is None:
         return ''
@@ -455,8 +566,10 @@ def main():
     pc = os.path.join(QUI, 'caroselli.json')
     caroselli = json.load(open(pc, encoding='utf-8')) if os.path.exists(pc) else []
     indice(voci, uscita, caroselli)
+    n_comuni, n_schede = pagina_comuni(voci, uscita)
     open(os.path.join(uscita, '.nojekyll'), 'w').close()
-    print('sito costruito in', uscita, '-', len(voci), 'video,', len(caroselli), 'caroselli')
+    print('sito costruito in', uscita, '-', len(voci), 'video,', len(caroselli), 'caroselli,',
+          f'pagina dei comuni con {n_comuni} comuni e {n_schede} video')
 
 
 if __name__ == '__main__':

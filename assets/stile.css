@@ -132,3 +132,25 @@ tr.citato td { background: var(--riga); font-weight: 600; }
 .link-comune { all: unset; cursor: pointer; color: var(--accento); text-decoration: underline; text-underline-offset: 2px; }
 .link-comune:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* «Il tuo comune in numeri» (comune/index.html) */
+.proposte { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--linea); }
+.proposte li { padding: 10px 0; border-bottom: 1px solid var(--linea); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.proposte a { font-weight: 700; font-size: 17px; text-decoration: none; }
+.proposte a:hover { text-decoration: underline; }
+.proposte span { color: var(--grigio); font-size: 14px; }
+.testa-comune { display: flex; flex-direction: column; gap: 6px; border-top: 2px solid var(--inchiostro); padding-top: 16px; }
+.testa-comune h2 { font-size: clamp(26px, 5vw, 36px); }
+.voci { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.voce { background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.voce h3 { font-size: 15px; font-weight: 700; line-height: 1.35; }
+.voce h3 a { text-decoration: none; }
+.voce h3 a:hover { text-decoration: underline; }
+.voce .indicatore { color: var(--grigio); font-size: 14px; }
+.voce .valore { font-size: 17px; }
+.voce .valore strong { font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.voce .valore.assente { color: var(--grigio); font-size: 15px; }
+.voce .confronto { color: var(--grigio); font-size: 14px; display: flex; flex-wrap: wrap; gap: 2px 14px; }
+.voce .barra { position: relative; height: 8px; border-radius: 4px; margin-top: 6px;
+  background: linear-gradient(90deg, #cde2fb, #0d366b); }
+.voce .barra i { position: absolute; top: 50%; width: 16px; height: 16px; margin-left: -8px; transform: translateY(-50%);
+  border-radius: 50%; background: var(--superficie); border: 3px solid var(--inchiostro); }
