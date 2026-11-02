@@ -79,3 +79,19 @@ Per sapere da quale social arrivano le visite, il link in bio ha un parametro di
 - I file sono generati da `dati.py`, gli stessi numeri del video: niente si ricopia a mano.
 - La scheda (fonte, link, anno, metodo, soglia, limiti) deve essere completa: `--esporta` si ferma se manca un campo.
 - Per avere il valore esatto di ogni comune, non solo la fascia, nel browser si usa `M.valori` (vedi la skill): costa un trasferimento più lungo, quindi si decide video per video.
+
+## Pagina «Il tuo comune in numeri» (solo dal link)
+
+`costruisci.py` scrive anche `comune/index.html` e `comune/numeri.js`: la scheda di un comune con i numeri di tutti i video pubblicati, confrontati con l'Italia, e il link alla pagina di ogni video. Serve per le risposte in DM a chi commenta «SCHEDA + comune».
+- Si apre **solo dal link**: `https://comunechevai.github.io/comune/?rio-saliceto` (nome in minuscolo, trattini al posto di spazi e apostrofi; vanno bene anche accenti e maiuscole). Per i comuni con lo stesso nome si aggiunge la sigla: `?castro-le`. Senza sigla la pagina propone i comuni omonimi.
+- Niente campo di ricerca, nessun link dal sito né dalla sitemap, `noindex` per i motori di ricerca (decisione di Paolo del 2/11/2026).
+- Un video nuovo entra da solo alla rigenerazione; decimali e riferimento italiano si fissano in `SCHEDA_COMUNE` dentro `costruisci.py`.
+- GoatCounter conta ogni scheda aperta come evento `comune/<nome>`.
+
+## Pagina «I redditi del tuo comune» (solo dal link)
+
+`costruisci.py` scrive anche `redditi/index.html` e `redditi/dati.js` (codice in `redditi.py`, pagina in `assets/redditi.js`): per chi commenta «REDDITI + comune» (dal video 12, 3/11/2026). Dati MEF dell'ultimo anno d'imposta letti direttamente da `fonti/` (non dai video): reddito medio con il confronto con Italia e regione e la posizione in provincia, contribuenti ogni 100 abitanti (ISTAT), stipendi, pensioni e lavoro autonomo (quanti e quanto in media), contribuenti per fascia di reddito; per le 41 città con più CAP la tabella CAP per CAP e, se c'è, il link alla pagina del video sulle zone.
+- Link: `https://comunechevai.github.io/redditi/?veroli`, stesse regole della pagina dei comuni (codice comune ai due in `assets/trova_comune.js`). Niente link dal sito, `noindex`.
+- Le fasce che il MEF oscura (segreto statistico) restano «non pubblicato»: mai ricavate per differenza. Le quote dell'Italia per fascia vengono dal file nazionale, perché la somma dei comuni sarebbe sbagliata proprio per le celle oscurate.
+- Anno nuovo (aprile): cambiare `ANNO` e i quattro file in testa a `redditi.py`, poi rigenerare.
+- GoatCounter conta ogni scheda aperta come evento `redditi/<nome>`.

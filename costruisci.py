@@ -23,6 +23,7 @@ Pagina «Il tuo comune in numeri» (comune/index.html + comune/numeri.js, assets
 i video pubblicati, con il confronto con l'Italia (SCHEDA_COMUNE) e il link alla pagina del video. Si apre solo dal link
 mandato in DM a chi commenta: comune/?rio-saliceto (minuscole, trattini; con omonimi anche la sigla: comune/?castro-le).
 Niente ricerca libera, nessun link dal resto del sito, noindex per i motori di ricerca (decisione di Paolo del 2/11/2026).
+Pagina «I redditi del tuo comune» (redditi/, per chi commenta REDDITI): stesse regole, dati MEF letti da fonti/, vedi redditi.py.
 Dopo aver costruito, si pubblica il contenuto di sito/ nel repository GitHub (vedi sito/README.md).
 """
 import datetime
@@ -31,6 +32,8 @@ import json
 import os
 import shutil
 import sys
+
+from redditi import pagina_redditi
 
 QUI = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(QUI)
@@ -408,6 +411,7 @@ PAGINA_COMUNE = '''<a class="indietro" href="../index.html">← Tutti i video</a
 <div id="proposte" hidden></div>
 <section class="sezione scheda-comune" id="scheda" aria-live="polite" hidden></section>
 <script src="numeri.js?v=@V_DATI@"></script>
+<script src="../@TROVA@"></script>
 <script src="../@JS@"></script>
 '''
 
@@ -465,7 +469,7 @@ def pagina_comuni(voci, uscita):
     corpo = corpo.replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1)
     corpo += (PAGINA_COMUNE.replace('@N_VIDEO@', str(n_video))
               .replace('@V_DATI@', hashlib.md5(js.encode('utf-8')).hexdigest()[:8])
-              .replace('@JS@', ver('comune.js')))
+              .replace('@TROVA@', ver('trova_comune.js')).replace('@JS@', ver('comune.js')))
     corpo += piede()
     open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
     return len(comuni), n_video
@@ -567,9 +571,10 @@ def main():
     caroselli = json.load(open(pc, encoding='utf-8')) if os.path.exists(pc) else []
     indice(voci, uscita, caroselli)
     n_comuni, n_schede = pagina_comuni(voci, uscita)
+    _, n_cap = pagina_redditi(voci, uscita, testa, piede, ver)
     open(os.path.join(uscita, '.nojekyll'), 'w').close()
     print('sito costruito in', uscita, '-', len(voci), 'video,', len(caroselli), 'caroselli,',
-          f'pagina dei comuni con {n_comuni} comuni e {n_schede} video')
+          f'pagina dei comuni con {n_comuni} comuni e {n_schede} video, redditi con {n_cap} città divise per CAP')
 
 
 if __name__ == '__main__':
