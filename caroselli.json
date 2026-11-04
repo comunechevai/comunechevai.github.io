@@ -29,5 +29,25 @@
     "nota": "Seguito del video 08: la pagina del video ha fonte, metodo, la mappa delle 24 zone e la ricerca per quartiere.",
     "video": "08_stessa_citta_palermo",
     "instagram": "https://www.instagram.com/p/DfNoyQjERvX/"
+  },
+  {
+    "cartella": "2026-11-03_giro2027",
+    "pubblicato": "2026-11-03",
+    "titolo": "Giro d'Italia 2027: le 39 sedi di tappa, 16 per la prima volta, e tutte le sedi dal 1909 per regione e paese",
+    "fonte": "Percorso: giroditalia.it (presentazione del 3/11/2026). Storico: Wikipedia, «Sedi di tappa del Giro d'Italia», dati fino al Giro 2026",
+    "fonte_url": "https://www.giroditalia.it/en/the-route/",
+    "nota": "Lo storico viene da Wikipedia (CC BY-SA, https://it.wikipedia.org/wiki/Sedi_di_tappa_del_Giro_d%27Italia), non dall'organizzatore, e conta le località con il nome ufficiale della tappa, non i comuni (Monte Zoncolan e l'Autodromo del Mugello sono a parte). Piani di Bobbio/Valtorta non è contato tra le prime volte perché c'è già stato un arrivo a Barzio. I 5 passi sul confine tra due regioni sono contati nella prima regione indicata da Wikipedia. File: le 21 tappe, le 39 sedi (con comune, codice ISTAT, abitanti e volte da sede fino al 2026), le volte da sede per regione e per paese dal 1909 al 2026.",
+    "file": [
+      "giro2027_tappe.csv",
+      "giro2027_sedi.csv",
+      "giro_storico_regioni_estero.csv"
+    ],
+    "instagram": "https://www.instagram.com/p/DfS_ts4CJkX/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7704084786599578902",
+    "etichette": {
+      "giro2027_tappe.csv": "Scarica le tappe (CSV)",
+      "giro2027_sedi.csv": "Scarica le sedi 2027 (CSV)",
+      "giro_storico_regioni_estero.csv": "Scarica lo storico per regione e paese (CSV)"
+    }
   }
 ]

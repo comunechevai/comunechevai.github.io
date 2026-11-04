@@ -16,6 +16,7 @@ sito/caroselli.json è l'elenco dei caroselli pubblicati (sezione «Caroselli» 
       "fonte": "...", "fonte_url": "https://...", "nota": "...",
       "video": "03_auto",                       # facoltativo: seguito di un video -> link alla sua pagina
       "file": ["pedoni_province_2025.csv"],     # facoltativo: dati nuovi, copiati da caroselli/<cartella>/
+      "etichette": {"pedoni_province_2025.csv": "Scarica le province (CSV)"},   # facoltativo, con piu' file
       "instagram": "...", "tiktok": "...", "youtube": "..."}]
 Classifiche fatte da altri: solo il link alla fonte, senza ricopiarne le tabelle.
 
@@ -498,7 +499,7 @@ def sezione_caroselli(caroselli, uscita):
             os.makedirs(dest, exist_ok=True)
             shutil.copy2(os.path.join(ROOT, 'caroselli', c, f), os.path.join(dest, f))
             link_file += (f'<a href="caroselli/{e(c)}/{e(f)}" download{clic(f"scarica-{c}-{f}", f"Scarica {f}")}>'
-                          f'Scarica {e(f.rsplit(".", 1)[-1].upper())}</a>')
+                          f'{e(k.get("etichette", {}).get(f) or "Scarica " + f.rsplit(".", 1)[-1].upper())}</a>')
         if k.get('video'):
             href, cl = f"video/{e(k['video'])}/index.html", ''
         else:

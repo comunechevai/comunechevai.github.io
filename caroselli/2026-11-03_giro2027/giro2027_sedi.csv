@@ -1,0 +1,40 @@
+sede,tappe_partenza,tappe_arrivo,comune,sigla,codice_istat_2026,regione_o_stato,abitanti_1_1_2026,riga_wikipedia,volte_sede_fino_2026,partenze_fino_2026,arrivi_fino_2026,prima_volta
+Trieste,1,1,Trieste,TS,32006,Friuli-Venezia Giulia,198622,Trieste,40,18,22,no
+Lubiana,2,,,,,Slovenia,,Lubiana,3,1,2,no
+Capodistria,,2,,,,Slovenia,,,0,0,0,sì
+Cervignano del Friuli,3,,Cervignano del Friuli,UD,30023,Friuli-Venezia Giulia,13743,,0,0,0,sì
+Possagno,,3,Possagno,TV,26061,Veneto,2299,,0,0,0,sì
+Argenta,4,,Argenta,FE,38001,Emilia-Romagna,21295,,0,0,0,sì
+Misano Adriatico,,4,Misano Adriatico,RN,99005,Emilia-Romagna,14171,,0,0,0,sì
+Filottrano,5,,Filottrano,AN,42019,Marche,8849,,0,0,0,sì
+Sarnano-Sassotetto,,5,Sarnano,MC,43049,Marche,3058,,0,0,0,sì
+Alba Adriatica,6,,Alba Adriatica,TE,67001,Abruzzo,13325,Alba Adriatica,2,1,1,no
+Lanciano,,6,Lanciano,CH,69046,Abruzzo,33843,Lanciano,13,6,7,no
+Sulmona,7,,Sulmona,AQ,66098,Abruzzo,21610,Sulmona,12,7,5,no
+Campo di Giove,,7,Campo di Giove,AQ,66015,Abruzzo,742,,0,0,0,sì
+Trasacco,8,,Trasacco,AQ,66102,Abruzzo,5804,,0,0,0,sì
+Napoli,,8,Napoli,NA,63049,Campania,905050,Napoli,90,43,47,no
+Itri,9,,Itri,LT,59010,Lazio,10579,,0,0,0,sì
+Subiaco-Monte Livata,,9,Subiaco,RM,58103,Lazio,8527,,0,0,0,sì
+Palombara Sabina,10,,Palombara Sabina,RM,58075,Lazio,13157,,0,0,0,sì
+Norcia,,10,Norcia,PG,54035,Umbria,4399,,0,0,0,sì
+Gualdo Tadino,11,,Gualdo Tadino,PG,54023,Umbria,14133,Gualdo Tadino,1,0,1,no
+Scarperia (Mugello),,11,Scarperia e San Piero,FI,48053,Toscana,11943,Autodromo del Mugello,3,1,2,no
+Montecatini Terme,12,,Montecatini-Terme,PT,47011,Toscana,21805,Montecatini Terme,28,15,13,no
+Zeri (Passo Due Santi),,12,Zeri,MS,45017,Toscana,890,,0,0,0,sì
+Borgo Val di Taro,13,,Borgo Val di Taro,PR,34006,Emilia-Romagna,6736,Borgo Val di Taro,2,0,2,no
+Reggio Emilia,,13,Reggio nell'Emilia,RE,35033,Emilia-Romagna,172921,Reggio Emilia,14,7,7,no
+Cantù,14,,Cantù,CO,13041,Lombardia,40451,Cantù,3,2,1,no
+Piani di Bobbio/Valtorta,,14,,,,Lombardia,,,0,0,0,dubbio
+Monza,15,,Monza,MB,108033,Lombardia,123672,Monza,3,2,1,no
+Milano,,15,Milano,MI,15146,Lombardia,1362863,Milano,145,55,90,no
+Sondrio,16,,Sondrio,SO,14061,Lombardia,21495,Sondrio,11,7,4,no
+Aprica,,16,Aprica,SO,14004,Lombardia,1433,Passo dell'Aprica,12,3,9,no
+Chiari,17,,Chiari,BS,17052,Lombardia,19717,,0,0,0,sì
+Vo',,17,Vo',PD,28105,Veneto,3211,,0,0,0,sì
+Rovereto,18 19,,Rovereto,TN,22161,Trentino-Alto Adige/Südtirol,40513,Rovereto,7,3,4,no
+Madonna di Campiglio,,18,,,,Trentino-Alto Adige/Südtirol,,Madonna di Campiglio,5,2,3,no
+Sacile,,19,Sacile,PN,93037,Friuli-Venezia Giulia,19947,Sacile,1,1,0,no
+Pordenone,20,,Pordenone,PN,93033,Friuli-Venezia Giulia,52744,Pordenone,7,5,2,no
+Monte Zoncolan,,20,,,,Friuli-Venezia Giulia,,Monte Zoncolan,7,0,7,no
+Roma,21,21,Roma,RM,58091,Lazio,2745062,Roma,114,62,52,no
