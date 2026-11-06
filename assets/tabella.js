@@ -57,7 +57,8 @@
       if (conValori) tr.appendChild(cella(r[3] === null ? '—' : fmt.format(r[3]), 'num'));
       altre.forEach((a, i) => {
         const v = r[7 + i];
-        tr.appendChild(cella(v === null || v === undefined ? '—' : fmt.format(v), 'num'));
+        if (typeof v === 'string') tr.appendChild(cella(v === '' ? '—' : v, 'testo'));   // colonne di testo
+        else tr.appendChild(cella(v === null || v === undefined ? '—' : fmt.format(v), 'num'));
       });
       const f = r[4];
       const td = cella(f === null ? 'dato non disponibile' : fasce[f - 1].testo, 'testo');
