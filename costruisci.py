@@ -382,7 +382,8 @@ SCHEDA_COMUNE = {
     '13_alluvioni': dict(dec=1, italia='Italia, quota dei residenti in zona allagabile'),
     '14_anziani': dict(dec=1, italia='Anziani per bambino in Italia'),
     '15_moto_ape': dict(dec=1, italia='Italia: moto ogni 100 abitanti'),
-    '16_arricchiti': dict(dec=1, italia="Italia, variazione al netto dell'inflazione (%)"),
+    '16_contribuenti': dict(dec=1, italia='Contribuenti ogni 100 adulti, Italia'),
+    '19_arricchiti': dict(dec=1, italia="Italia, variazione al netto dell'inflazione (%)"),
     '05_pedoni': dict(dec=1, italia='Investimenti di pedone ogni 100.000 abitanti, media italiana'),
 }
 
