@@ -49,5 +49,19 @@
       "giro2027_sedi.csv": "Scarica le sedi 2027 (CSV)",
       "giro_storico_regioni_estero.csv": "Scarica lo storico per regione e paese (CSV)"
     }
+  },
+  {
+    "cartella": "2026-11-09_derby-pisa-livorno",
+    "pubblicato": "2026-11-09",
+    "titolo": "Derby Pisa–Livorno: 7 sfide fra le due città e il campionato dei 30 comuni delle due province",
+    "fonte": "MEF, redditi IRPEF 2024; ISTAT (popolazione al 1/1/2026, censimento permanente 2024, nidi 2024/25, bilancio demografico 2025, ASIA 2024); ISPRA (IdroGEO, consumo di suolo 2025); ACI, auto al 31/12/2025; Corte dei conti, comuni in crisi finanziaria al 31/12/2025",
+    "fonte_url": "https://www1.finanze.gov.it/finanze/pagina_dichiarazioni/public/dichiarazioni.php",
+    "nota": "Un gioco di Comune che vai, non un indice ufficiale. Derby: un punto a chi vince ognuna delle 7 sfide (reddito complessivo medio, residenti in aree a pericolosità idraulica media P2, età media, quota di auto Euro 0, posti al nido ogni 100 bambini 0-2 anni, occupati 15-64 anni, categoria della prima squadra di calcio). Campionato: i 30 comuni delle province di Pisa e Livorno con almeno 5.000 abitanti; nelle 6 sfide sui numeri il primo prende 30 punti, l'ultimo 1 (pari merito: stessa posizione). Limiti: aree allagabili 2020 con residenti 2011; occupati del censimento stimati; nati 2025 provvisori. Il file ha i valori, le posizioni e i punti di ogni comune.",
+    "file": [
+      "derby_pisa_livorno_30_comuni.csv"
+    ],
+    "instagram": "https://www.instagram.com/p/DfiMZPKEVG1/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7706271752808172822",
+    "youtube": "https://www.youtube.com/post/UgkxD3NaDFIdFqxOaZ-RARbs3pdHr6bWEUBc"
   }
 ]
