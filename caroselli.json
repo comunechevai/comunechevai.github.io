@@ -77,5 +77,19 @@
     "instagram": "https://www.instagram.com/comunechevai/reel/DfkseIPxJVD/",
     "tiktok": "https://www.tiktok.com/@comunechevai/video/7706631352015162646",
     "youtube": "https://www.youtube.com/shorts/z6hH36AIVGc"
+  },
+  {
+    "cartella": "2026-11-11_derby-bari-lecce",
+    "pubblicato": "2026-11-11",
+    "titolo": "Derby Bari–Lecce: 7 sfide fra le due città e il campionato dei 48 comuni delle due province",
+    "fonte": "MEF, redditi IRPEF 2024; ISTAT (popolazione al 1/1/2026, presenze turistiche 2025, matrici dei tempi, aeroporti); ISPRA, raccolta differenziata 2024; MUR, iscritti all'università 2024/25; OpenStreetMap; RFI",
+    "fonte_url": "https://www1.finanze.gov.it/finanze/pagina_dichiarazioni/public/dichiarazioni.php",
+    "nota": "Un gioco di Comune che vai, non un indice ufficiale. Derby: un punto a chi vince ognuna delle 7 sfide (reddito complessivo medio, età media, notti di turisti per abitante, minuti medi da aeroporto, superstrada e stazione principale, raccolta differenziata, studenti iscritti ai corsi con sede in città, serie della prima squadra di calcio). Campionato: i 48 comuni della città metropolitana di Bari e della provincia di Lecce con almeno 12.000 abitanti; nelle 5 sfide sui numeri il primo prende 48 punti, l'ultimo 1 (pari merito: stessa posizione); università e calcio solo nel derby. Limiti: presenze 2025 con gli affitti brevi; minuti da municipio a municipio, nostro calcolo sulla matrice ISTAT; studenti in numero assoluto (in proporzione agli abitanti Lecce ne ha di più). Musica del reel: «Hidden Agenda» e «Der Kleber Sting» di Kevin MacLeod (incompetech.com), licenza CC BY 4.0. Il file ha i valori, le posizioni e i punti di ogni comune.",
+    "file": [
+      "derby_bari_lecce_48_comuni.csv"
+    ],
+    "instagram": "https://www.instagram.com/comunechevai/reel/DfnLqJ3xQjd/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7706980562048765206",
+    "youtube": "https://www.youtube.com/shorts/eXpPny5VFwQ"
   }
 ]
