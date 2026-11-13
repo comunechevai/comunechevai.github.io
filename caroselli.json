@@ -93,6 +93,20 @@
     "youtube": "https://www.youtube.com/shorts/eXpPny5VFwQ"
   },
   {
+    "cartella": "2026-11-12_derby-bologna-modena",
+    "pubblicato": "2026-11-12",
+    "titolo": "Derby Bologna–Modena: 7 sfide fra le due città e il campionato dei 36 comuni delle due province",
+    "fonte": "MEF, redditi IRPEF 2024; ISTAT (popolazione al 1/1/2026, censimento 2021: pendolari per lavoro, matrici dei tempi); ISPRA, raccolta differenziata 2024; MUR, iscritti all'università 2024/25; Agenzia delle Entrate – OMI, quotazioni immobiliari 1° semestre 2026",
+    "fonte_url": "https://www1.finanze.gov.it/finanze/pagina_dichiarazioni/public/dichiarazioni.php",
+    "nota": "Un gioco di Comune che vai, non un indice ufficiale. Derby: un punto a chi vince ognuna delle 7 sfide (reddito complessivo medio, età media, studenti iscritti ai corsi con sede in città, lavoratori che entrano meno quelli che escono ogni 100 abitanti, raccolta differenziata, serie della prima squadra di calcio, anni di reddito medio per comprare 100 m² al prezzo medio OMI). Campionato: i 36 comuni della città metropolitana di Bologna e della provincia di Modena con almeno 11.500 abitanti; nelle 5 sfide sui numeri il primo prende 36 punti, l'ultimo 1 (pari merito: stessa posizione); università e calcio solo nel derby. Limiti: sfide scelte da noi (con i turisti al posto dei lavoratori vincerebbe Bologna); pendolari del censimento 2021, in numero ne entrano di più a Bologna; casa: nostro calcolo, le quotazioni OMI sono stime per zona e il prezzo del comune è la media semplice delle zone. Musica del reel: «Hidden Agenda» e «Der Kleber Sting» di Kevin MacLeod (incompetech.com), licenza CC BY 4.0. Il file ha i valori, le posizioni e i punti di ogni comune.",
+    "file": [
+      "derby_bologna_modena_36_comuni.csv"
+    ],
+    "instagram": "https://www.instagram.com/comunechevai/reel/Dfp191cx-I9/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7707374971982499094",
+    "youtube": "https://www.youtube.com/shorts/9o01AwaXs2c"
+  },
+  {
     "cartella": "2026-11-13_derby-palermo-catania",
     "pubblicato": "2026-11-13",
     "titolo": "Derby Palermo–Catania: 7 sfide fra le due città e il campionato dei 40 comuni delle due città metropolitane",
