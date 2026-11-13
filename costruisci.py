@@ -25,6 +25,9 @@ i video pubblicati, con il confronto con l'Italia (SCHEDA_COMUNE) e il link alla
 mandato in DM a chi commenta: comune/?rio-saliceto (minuscole, trattini; con omonimi anche la sigla: comune/?castro-le).
 Niente ricerca libera, nessun link dal resto del sito, noindex per i motori di ricerca (decisione di Paolo del 2/11/2026).
 Pagina «I redditi del tuo comune» (redditi/, per chi commenta REDDITI): stesse regole, dati MEF letti da fonti/, vedi redditi.py.
+Pagina «La mappa dei comuni» (mappa/, assets/mappa_comuni.js): tutti i numeri del database dei comuni (db/esportazione_sito,
+fatta da db/esporta_sito.py) su una mappa da colorare, con classifica, scheda della fonte e CSV; pubblica e linkata dalla
+pagina principale quando IN_INDICE è True (richiamo «Cerca il tuo comune: mappa e dati al link in bio»), vedi mappa_comuni.py.
 Dopo aver costruito, si pubblica il contenuto di sito/ nel repository GitHub (vedi sito/README.md).
 """
 import datetime
@@ -34,6 +37,7 @@ import os
 import shutil
 import sys
 
+from mappa_comuni import IN_INDICE, pagina_mappa
 from redditi import pagina_redditi
 
 QUI = os.path.dirname(os.path.abspath(__file__))
@@ -517,7 +521,14 @@ def sezione_caroselli(caroselli, uscita):
 '''
 
 
-def indice(voci, uscita, caroselli=()):
+def richiamo_mappa(n_ind):
+    return f'''<a class="richiamo-mappa" href="mappa/index.html"><strong>La mappa dei comuni</strong>
+<span>{n_ind} numeri per ognuno dei 7.896 comuni: scegli un numero, cerca il tuo comune e scarica i dati.</span>
+<span class="vai">Apri la mappa →</span></a>
+'''
+
+
+def indice(voci, uscita, caroselli=(), n_ind=0):
     corpo = testa('Fonti e dati di ogni video · Comune che vai',
                   'Fonte, metodo e dati comune per comune di ogni video di Comune che vai, da scaricare in CSV o Excel.', '')
     corpo += '''<header class="intro"><h1>Fonti e dati di ogni video</h1>
@@ -527,6 +538,8 @@ def indice(voci, uscita, caroselli=()):
         corpo += '<p><a href="#t-caroselli">Cerchi un carosello? Sono più in basso ↓</a></p>\n'
     corpo += '''</header>
 '''
+    if n_ind:
+        corpo += richiamo_mappa(n_ind)
     if voci:
         corpo += '<ul class="elenco">'
         for v, s in reversed(voci):
@@ -571,12 +584,14 @@ def main():
         voci.append((v, s))
     pc = os.path.join(QUI, 'caroselli.json')
     caroselli = json.load(open(pc, encoding='utf-8')) if os.path.exists(pc) else []
-    indice(voci, uscita, caroselli)
+    _, n_ind = pagina_mappa(uscita, testa, piede, ver, ICONA_SCARICA)
+    indice(voci, uscita, caroselli, n_ind if IN_INDICE else 0)
     n_comuni, n_schede = pagina_comuni(voci, uscita)
     _, n_cap = pagina_redditi(voci, uscita, testa, piede, ver)
     open(os.path.join(uscita, '.nojekyll'), 'w').close()
     print('sito costruito in', uscita, '-', len(voci), 'video,', len(caroselli), 'caroselli,',
-          f'pagina dei comuni con {n_comuni} comuni e {n_schede} video, redditi con {n_cap} città divise per CAP')
+          f'pagina dei comuni con {n_comuni} comuni e {n_schede} video, redditi con {n_cap} città divise per CAP,',
+          f'mappa dei comuni con {n_ind} numeri')
 
 
 if __name__ == '__main__':

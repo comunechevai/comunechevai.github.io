@@ -175,3 +175,28 @@ tr.citato td { background: var(--riga); font-weight: 600; }
   .fr .et { grid-column: 1 / -1; }
   .fr .sotto { grid-column: 1 / -1; }
 }
+/* «La mappa dei comuni» (mappa/index.html) */
+.scelte { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+.scelte label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; flex: 1 1 260px; min-width: 0; }
+.scelte select {
+  font: inherit; font-weight: 400; min-height: 44px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--linea);
+  background: var(--superficie); color: var(--inchiostro); width: 100%; max-width: 100%;
+}
+.cerca-comune { position: relative; }
+.cerca-comune .proposte { flex-basis: 100%; margin-top: 0; }
+.cerca-comune .proposte li { padding: 6px 0; }
+.mappa-valore { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.classifiche { display: grid; gap: 16px 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.classifiche h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.classifiche ol { margin: 0; padding-left: 2.6em; display: flex; flex-direction: column; gap: 4px; font-variant-numeric: tabular-nums; }
+.classifiche li { padding: 2px 0; }
+.classifiche .valore-lista { color: var(--grigio); margin-left: 8px; font-size: 15px; }
+.fasce span { font-variant-numeric: tabular-nums; }
+.fasce li.unita { color: var(--grigio); font-size: 13px; }
+.fasce .conta { color: var(--grigio); font-size: 13px; }
+.richiamo-mappa { display: grid; gap: 4px; margin: 0 0 32px; padding: 18px 20px; border-radius: 12px; background: var(--superficie);
+  border: 1px solid var(--linea); border-left: 4px solid var(--accento); color: var(--inchiostro); text-decoration: none; }
+.richiamo-mappa strong { font-size: 19px; }
+.richiamo-mappa span { color: var(--grigio); }
+.richiamo-mappa .vai { color: var(--accento); font-weight: 700; }
+.richiamo-mappa:hover .vai { text-decoration: underline; }

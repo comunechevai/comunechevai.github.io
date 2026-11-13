@@ -10,7 +10,8 @@ Indirizzo previsto: **https://comunechevai.github.io**
 sito/
   index.html        elenco dei video (generato)
   video/NN_tema/    pagina del video + NN_tema.xlsx + NN_tema.csv (generati)
-  assets/           stile.css, tabella.js, mappa.js, d3.min.js, comuni_2026.js, icona.png
+  assets/           stile.css, tabella.js, mappa.js, mappa_comuni.js, d3.min.js, comuni_2026.js, icona.png
+  mappa/            la mappa dei comuni (generata da mappa_comuni.py)
   video.json        elenco dei video pubblicati: lo aggiorna Claude
   costruisci.py     rigenera index.html e video/*
   geometrie_sito.py crea assets/comuni_2026.js (confini per la mappa; una volta sola)
@@ -95,3 +96,14 @@ Per sapere da quale social arrivano le visite, il link in bio ha un parametro di
 - Le fasce che il MEF oscura (segreto statistico) restano «non pubblicato»: mai ricavate per differenza. Le quote dell'Italia per fascia vengono dal file nazionale, perché la somma dei comuni sarebbe sbagliata proprio per le celle oscurate.
 - Anno nuovo (aprile): cambiare `ANNO` e i quattro file in testa a `redditi.py`, poi rigenerare.
 - GoatCounter conta ogni scheda aperta come evento `redditi/<nome>`.
+
+## La mappa dei comuni (pubblica)
+
+`costruisci.py` scrive anche `mappa/` (codice in `mappa_comuni.py`, pagina in `assets/mappa_comuni.js`): tutti i numeri del database dei comuni su una mappa da colorare. Si sceglie tema e numero, si tocca o si cerca un comune; sotto ci sono la classifica (solo sopra la soglia del numero, come nei video), la scheda della fonte (definizione, fonte, data, licenza, limiti) e il CSV di tutti i comuni.
+- Dati: `db/esportazione_sito/` (fatta da `python db/esporta_sito.py`, vedi `db/LEGGIMI.md`). `mappa_comuni.py` li trasforma in `mappa/dati/comuni.js`, `catalogo.js` e un file per numero in `mappa/dati/ind/`, caricato solo quando lo si sceglie (circa 12 MB in tutto, la pagina ne scarica qualche centinaio di KB). Nessun numero si ricalcola: sono quelli del database.
+- Temi e nomi brevi: `TEMI` ed `ETICHETTE` in `mappa_comuni.py`; un numero nuovo nel database senza tema ferma la costruzione. Codici da scrivere in parole (categorie del calcio, zone sismiche): `VALORI`; dato vuoto con un significato («nessuna squadra»): `VUOTO`.
+- Colori: quantili sui comuni con il dato, con limiti arrotondati; una fascia per valore se i valori sono pochi (con quanti comuni in ognuno, e niente classifica); divergente se ci sono valori positivi e negativi; lo 0 a parte se riguarda almeno il 10% dei comuni.
+- Link condivisibile: `mappa/?n=<numero>&c=<comune>` (es. `mappa/?n=servizi_a_piedi&c=mirandola`).
+- `CERCA` (ricerca del comune nella pagina) e `IN_INDICE` in testa a `mappa_comuni.py`. Dal 13/11/2026 la pagina è online ma non collegata: `IN_INDICE = False` toglie il riquadro dalla pagina principale e mette `noindex`, quindi la apre solo chi ha il link https://comunechevai.github.io/mappa/ (decisione di Paolo). Con `True` compare il riquadro «La mappa dei comuni» in home e il `noindex` sparisce.
+- Da sola: `python sito/mappa_comuni.py` (o `--uscita cartella` per una prova). Quando si aggiorna il database: `python db/esporta_sito.py`, poi `python sito/costruisci.py`, poi si carica `mappa/` (e `index.html`).
+- GoatCounter: `mappa-dati-<numero>` per ogni numero scelto, `mappa-dati-usata` una volta per visita, `scarica-csv-mappa-<numero>` per i CSV.

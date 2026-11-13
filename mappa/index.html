@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La mappa dei comuni · Comune che vai</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="289 numeri per ognuno dei 7.896 comuni italiani su una mappa: redditi, età, servizi, clima, case, turismo e altro, da fonti pubbliche.">
+<link rel="icon" href="../assets/icona.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/stile.css?v=12e754f5">
+<script data-goatcounter="https://comunechevai.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<main class="pagina">
+<a class="testata" href="../index.html"><img src="../assets/icona.png" alt="" width="52" height="52">
+<span><span class="marchio">Comune che vai</span><br><span class="motto">Comune che vai, numero che trovi.</span></span></a>
+<a class="indietro" href="../index.html">← Tutti i video</a>
+<header class="intro"><h1>La mappa dei comuni</h1>
+<p>289 numeri per ognuno dei 7.896 comuni italiani, tutti da fonti pubbliche. Scegli un numero e la mappa si colora; tocca un comune o cercalo per vedere il suo valore e il posto in classifica. Sotto la mappa trovi da dove viene il numero e i suoi limiti.</p></header>
+<section class="sezione" aria-label="Scegli il numero">
+<div class="scelte">
+<label>Tema<select id="scelta-tema"></select></label>
+<label>Numero<select id="scelta-numero"></select></label>
+</div>
+<div class="cerca cerca-comune"><label for="cerca-comune">Cerca un comune</label>
+<input id="cerca-comune" type="search" autocomplete="off" placeholder="es. Mirandola" aria-controls="suggerimenti">
+<ul class="proposte" id="suggerimenti" hidden></ul></div>
+</section>
+<section class="sezione" aria-labelledby="titolo-numero">
+<h2 id="titolo-numero">La mappa</h2>
+<p class="nota" id="sottotitolo-numero"></p>
+<div class="mappa-box" id="mappa"><canvas aria-label="Mappa dei comuni colorata secondo il numero scelto"></canvas>
+<div class="mappa-comandi"><button type="button" data-zoom="piu" aria-label="Ingrandisci">+</button><button type="button" data-zoom="meno" aria-label="Rimpicciolisci">−</button><button type="button" data-zoom="italia" class="testo" aria-label="Tutta Italia">ITA</button></div>
+<div class="mappa-avviso" hidden></div></div>
+<ul class="fasce" id="legenda" aria-label="Legenda"></ul>
+<div class="mappa-info" id="mappa-info" aria-live="polite"></div>
+</section>
+<section class="sezione" aria-labelledby="t-classifica">
+<h2 id="t-classifica">Classifica</h2>
+<p class="nota" id="nota-classifica"></p>
+<div class="classifiche"><div><h3>I valori più alti</h3><ol id="primi"></ol></div><div><h3>I valori più bassi</h3><ol id="ultimi"></ol></div></div>
+</section>
+<section class="sezione" aria-labelledby="t-fonte">
+<h2 id="t-fonte">Da dove viene questo numero</h2>
+<dl class="scheda" id="scheda-numero"></dl>
+<div class="azioni"><button type="button" class="bottone" id="scarica-csv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>Scarica i dati di tutti i comuni (CSV)</button></div>
+<p class="nota">Dati aggiornati al 13/11/2026. Fonti e licenze sono quelle indicate per ogni numero; se trovi un errore scrivilo nei commenti di un video.</p>
+</section>
+<script src="dati/comuni.js?v=6c0c9132"></script>
+<script src="dati/catalogo.js?v=a493d0b0"></script>
+<script src="../assets/d3.min.js?v=69faba9d"></script>
+<script src="../assets/comuni_2026.js?v=dc9aa526"></script>
+<script src="../assets/mappa_comuni.js?v=f91549f0"></script>
+<footer class="piede"><p>Comune che vai: mappe dei comuni italiani raccontate con dati pubblici.</p>
+<p>@comunechevai su <a href="https://www.instagram.com/comunechevai/" data-goatcounter-click="profilo-instagram" data-goatcounter-title="Profilo Instagram">Instagram</a> · <a href="https://www.tiktok.com/@comunechevai" data-goatcounter-click="profilo-tiktok" data-goatcounter-title="Profilo TikTok">TikTok</a> · <a href="https://www.youtube.com/@comunechevai" data-goatcounter-click="profilo-youtube" data-goatcounter-title="Profilo YouTube">YouTube</a></p></footer>
+</main>
+</body>
+</html>
