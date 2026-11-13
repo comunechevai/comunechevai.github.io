@@ -91,5 +91,19 @@
     "instagram": "https://www.instagram.com/comunechevai/reel/DfnLqJ3xQjd/",
     "tiktok": "https://www.tiktok.com/@comunechevai/video/7706980562048765206",
     "youtube": "https://www.youtube.com/shorts/eXpPny5VFwQ"
+  },
+  {
+    "cartella": "2026-11-13_derby-palermo-catania",
+    "pubblicato": "2026-11-13",
+    "titolo": "Derby Palermo–Catania: 7 sfide fra le due città e il campionato dei 40 comuni delle due città metropolitane",
+    "fonte": "MEF, redditi IRPEF 2024; ISTAT (nati 2025, servizi per la prima infanzia 2024/25, censimento 2021: pendolari per lavoro, passeggeri degli aeroporti 2025); ISPRA, raccolta differenziata 2024",
+    "fonte_url": "https://www1.finanze.gov.it/finanze/pagina_dichiarazioni/public/dichiarazioni.php",
+    "nota": "Un gioco di Comune che vai, non un indice ufficiale. Derby: un punto a chi vince ognuna delle 7 sfide (reddito complessivo medio, nati ogni 1.000 abitanti, posti al nido ogni 100 bambini sotto i 3 anni, lavoratori che entrano meno quelli che escono ogni 100 abitanti, serie della prima squadra di calcio, raccolta differenziata, passeggeri dell'aeroporto della città). Campionato: i 40 comuni delle città metropolitane di Palermo e Catania con almeno 11.000 abitanti; nelle 5 sfide sui numeri il primo prende 40 punti, l'ultimo 1 (pari merito: stessa posizione); calcio e aeroporto solo nel derby. Limiti: sfide scelte da noi (con gli studenti universitari al posto dell'aeroporto vincerebbe Palermo, anche se in proporzione agli abitanti sono di più a Catania); l'aeroporto di Palermo è nel comune di Cinisi e nel 2025 è cresciuto di più (+3,3% contro +0,2%); pendolari del censimento 2021; nidi: posti autorizzati pubblici e privati censiti dall'ISTAT. Musica del reel: «Hidden Agenda» e «Der Kleber Sting» di Kevin MacLeod (incompetech.com), licenza CC BY 4.0. Il file ha i valori, le posizioni e i punti di ogni comune.",
+    "file": [
+      "derby_palermo_catania_40_comuni.csv"
+    ],
+    "instagram": "https://www.instagram.com/comunechevai/reel/DfsUWVgxX17/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7707731553866075414",
+    "youtube": "https://www.youtube.com/shorts/QzEMiBJyFVQ"
   }
 ]
