@@ -133,5 +133,19 @@
     "instagram": "",
     "tiktok": "",
     "youtube": ""
+  },
+  {
+    "cartella": "2026-11-15_stessa-provincia-ancona",
+    "pubblicato": "2026-11-15",
+    "titolo": "Stessa provincia · Ancona: i redditi dei 32 comuni e cinque tipi di comune",
+    "fonte": "MEF, redditi IRPEF 2024; ISTAT (imprese ASIA 2024, matrice del pendolarismo 2021, notti dei turisti 2025); Ministero della Salute, rete dell'emergenza 2025; MIM, scuole 2024/25; MUR, iscritti 2025/26; OpenStreetMap",
+    "fonte_url": "https://www1.finanze.gov.it/finanze/pagina_dichiarazioni/public/dichiarazioni.php",
+    "nota": "I 32 comuni della provincia di Ancona con almeno 2.500 abitanti (94% degli abitanti). Reddito: reddito complessivo medio del MEF, anno d'imposta 2024 (ammontare diviso per chi dichiara un reddito complessivo). Tipi di comune, un nostro gioco e non una classificazione ufficiale: per ogni comune cinque misure (contribuenti con una pensione ogni 100, solo per i comuni con quota di 65 anni e più e indice di vecchiaia sopra la mediana dei 32; addetti della manifattura ogni 100 abitanti; addetti di alberghi e ristoranti ogni 100 abitanti; lavoratori che escono meno quelli che entrano ogni 100 abitanti, 2021; servizi da città: pronto soccorso, cinema, almeno 5 scuole superiori, università, almeno 3 pub o discoteche), ognuna come scarto dalla media dei 32 in deviazioni standard; il comune va nel tipo della misura più alta. Loreto per il metodo sarebbe fra i paesi dormitorio (0,11 sopra il turismo): l'abbiamo messo nel turismo. Reddito di ogni tipo: somme dei comuni, non media delle medie. Aziende citate: nei comuni delle fabbriche quelle con almeno 250 addetti (Elica a Castelfidardo, motori elettrici; Fileni a Castelplanio, pollo; Lardini a Filottrano, giacche da uomo; Fiorini a Trecastelli, sacchetti di carta), nelle città alcune delle fabbriche più grandi della provincia (Angelini, farmaci, e Fincantieri, navi da crociera, ad Ancona; CNH, trattori, a Jesi; Beko, piani cottura, e Ariston, scaldabagni, a Fabriano); i nomi vengono da siti delle aziende e stampa, perché il registro ASIA pubblico non li riporta. Limiti: i posti di lavoro contano solo le imprese (manca la pubblica amministrazione); pendolari del 2021; dal 2025 le notti dei turisti comprendono gli affitti brevi; cinema e locali da OpenStreetMap. Musica del reel: «Hidden Agenda» di Kevin MacLeod (incompetech.com), licenza CC BY 4.0. Il file ha il reddito, il tipo, le cinque misure e gli scarti di ogni comune.",
+    "file": [
+      "stessa_provincia_ancona_32_comuni.csv"
+    ],
+    "instagram": "https://www.instagram.com/comunechevai/reel/DfxhLYARw-r/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7708482776936369430",
+    "youtube": "https://www.youtube.com/shorts/qYXsbACcYeY"
   }
 ]
