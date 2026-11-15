@@ -119,5 +119,19 @@
     "instagram": "https://www.instagram.com/comunechevai/reel/DfsUWVgxX17/",
     "tiktok": "https://www.tiktok.com/@comunechevai/video/7707731553866075414",
     "youtube": "https://www.youtube.com/shorts/QzEMiBJyFVQ"
+  },
+  {
+    "cartella": "2026-11-14_derby-rovigo-padova",
+    "pubblicato": "2026-11-14",
+    "titolo": "Derby Rovigo–Padova: 7 sfide fra le due città e il campionato dei 36 comuni delle due province",
+    "fonte": "MEF, redditi IRPEF 2024; ISPRA, raccolta differenziata 2024; ISTAT (notti dei turisti 2025, imprese della ristorazione 2024, occupati 15-64 anni del censimento permanente 2024); Agenzia delle Entrate–OMI, prezzi delle case 1° semestre 2026",
+    "fonte_url": "https://www1.finanze.gov.it/finanze/pagina_dichiarazioni/public/dichiarazioni.php",
+    "nota": "Un gioco di Comune che vai, non un indice ufficiale. Derby: un punto a chi vince ognuna delle 7 sfide (reddito complessivo medio, raccolta differenziata, notti dei turisti per abitante, anni di reddito per comprare 100 m² di casa, bar e ristoranti ogni 1.000 abitanti, occupati 15-64 anni, scudetti del rugby). Finisce 3 a 3: 15 scudetti a testa per Petrarca e Rovigo, decide la partita di domenica 15 novembre 2026. Campionato: i 36 comuni delle province di Padova e Rovigo con almeno 9.000 abitanti; nelle 6 sfide sui numeri il primo prende 36 punti, l'ultimo 1 (pari merito: stessa posizione); il rugby solo nel derby. Limiti: sfide scelte da noi (con le 12 usate negli altri derby Padova ne vincerebbe 9); dal 2025 le notti dei turisti comprendono gli affitti brevi; prezzi OMI stimati per zona; fra i locali anche mense e catering. Musica del reel: «Hidden Agenda» e «Der Kleber Sting» di Kevin MacLeod (incompetech.com), licenza CC BY 4.0. Il file ha i valori, le posizioni e i punti di ogni comune.",
+    "file": [
+      "derby_rovigo_padova_36_comuni.csv"
+    ],
+    "instagram": "",
+    "tiktok": "",
+    "youtube": ""
   }
 ]
