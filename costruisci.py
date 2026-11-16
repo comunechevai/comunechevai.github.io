@@ -10,6 +10,8 @@ sito/video.json è l'elenco dei video pubblicati, dal più vecchio al più nuovo
 Titolo, fonte, metodo e dati arrivano da video/<cartella>/dati_pubblici/ (render.py --esporta).
 Se la scheda.json del video ha "tipo": "settori" (confronto tra settori economici, non tra comuni) la pagina è quella dei settori
 (pagina_settori, assets/tabella_settori.js): tabella ricercabile dei settori Ateco, senza mappa.
+Se ha "tipo": "simulazione" (il 25 · Semaforo: una fila di auto simulata, nessun dato per comune) la pagina è quella della
+simulazione (pagina_simulazione): scheda, una riga per auto, numeri del video e il codice della simulazione da scaricare.
 
 sito/caroselli.json è l'elenco dei caroselli pubblicati (sezione «Caroselli» della pagina principale):
     [{"cartella": "2026-10-26_ecosistema-urbano", "pubblicato": "2026-10-26", "titolo": "...",
@@ -373,6 +375,74 @@ def pagina_settori(v, s, uscita):
     open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
 
 
+def pagina_simulazione(v, s, uscita):
+    """Pagina di un video costruito su una simulazione (scheda.json con tipo «simulazione»: il 25 · Semaforo).
+
+    Niente comuni e niente mappa: una riga per auto della fila (s['auto']: numero, tu, distanza dalla linea,
+    oggi parte, oggi passa la linea, tutti pronti parte, tutti pronti passa; passa = None se trova il rosso),
+    i numeri del video e il codice della simulazione da scaricare. La fonte esterna (classifica fatta da altri)
+    resta solo come link, con la spiegazione in s['tomtom'].
+    """
+    dest = os.path.join(uscita, 'video', v['cartella'])
+    os.makedirs(dest, exist_ok=True)
+    src = os.path.join(ROOT, 'video', v.get('sorgente', v['cartella']), 'dati_pubblici')
+    for k in ('csv', 'xlsx', 'sim'):
+        shutil.copy2(os.path.join(src, s['file'][k]), os.path.join(dest, s['file'][k]))
+    c = v['cartella']
+    guarda = ''.join(f'<a class="bottone" href="{e(v[k])}"{clic(f"guarda-{k}-{c}", f"Guarda su {n} · {c}")}>{ICONA_FUORI}Guarda su {n}</a>'
+                     for k, n in (('instagram', 'Instagram'), ('tiktok', 'TikTok'), ('youtube', 'YouTube')) if v.get(k))
+    pub = f" · pubblicato il {data_it(v['pubblicato'])}" if v.get('pubblicato') else ''
+    numeri = ''.join(
+        f'<tr><td class="testo">{e(n["cosa"])}</td><td class="num">{e(format_it(n["valore"]))} {e(n["unita"])}</td>'
+        f'<td class="testo">{e(n["nota"])}</td></tr>' for n in s['numeri'])
+    CITATA = ' class="citato"'      # fuori dall'f-string: niente barre rovesciate dentro (Python 3.10)
+    sec = lambda x: f'{format_it(x)} s' if x is not None else 'col rosso'
+    # «tutti pronti: parte» è uguale per tutti (scritto nella nota): in tabella solo quando passa, così sta nel telefono
+    righe = ''.join(
+        f'<tr{CITATA if tu else ""}><td class="num">{n}{" · tu" if tu else ""}</td><td class="num">{e(format_it(dist))}</td>'
+        f'<td class="num">{e(sec(op))}</td><td class="num">{e(sec(opa))}</td><td class="num">{e(sec(ppa))}</td></tr>'
+        for n, tu, dist, op, opa, pp, ppa in s['auto'])
+    parte_pronti = format_it(s['auto'][0][5])
+    n_oggi = sum(1 for r in s['auto'] if r[4] is not None)
+    n_pronti = sum(1 for r in s['auto'] if r[6] is not None)
+    corpo = testa(f"{s['titolo']} · Comune che vai", f"Come funziona la simulazione del video «{s['titolo']}», auto per auto.", '../../')
+    # cinque colonne di numeri che stanno nello schermo del telefono (stile solo di questa pagina: stile.css resta com'è)
+    corpo = corpo.replace('</head>', '<style>@media (max-width: 560px) { .tabella-box.stretta th, .tabella-box.stretta td '
+                                     '{ padding: 9px 6px; } .tabella-box.stretta th { white-space: normal; } }</style>\n</head>', 1)
+    corpo += f'''<a class="indietro" href="../../index.html">← Tutti i video</a>
+<header class="intro"><h1>{e(s['titolo'])}</h1>
+<div class="meta"><span>Video {e(s['numero'])}{pub}</span><span>Dati aggiornati il {data_it(s['generato_il'])}</span></div></header>
+<div class="azioni">
+<a class="bottone pieno" href="{e(s['file']['xlsx'])}" download{clic(f"scarica-excel-{c}", f"Scarica Excel · {c}")}>{ICONA_SCARICA}Scarica Excel</a>
+<a class="bottone" href="{e(s['file']['csv'])}" download{clic(f"scarica-csv-{c}", f"Scarica CSV · {c}")}>{ICONA_SCARICA}Scarica CSV</a>
+<a class="bottone" href="{e(s['file']['sim'])}" download{clic(f"scarica-sim-{c}", f"Scarica la simulazione · {c}")}>{ICONA_SCARICA}Scarica la simulazione (Python)</a>
+<a class="bottone" href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>{ICONA_FUORI}Classifica TomTom</a>{guarda}
+</div>
+<section class="sezione" aria-labelledby="t-scheda"><h2 id="t-scheda">Da dove vengono i numeri</h2>
+<dl class="scheda">
+<dt>Cosa misura</dt><dd>{e(s['indicatore'])}</dd>
+<dt>Come funziona la simulazione</dt><dd>{e(s['metodo'])}</dd>
+<dt>Confronto</dt><dd>{e(s['soglia'])}</dd>
+<dt>Limiti</dt><dd>{e(s['limiti'])}</dd>
+<dt>Ore perse in coda</dt><dd>{e(s['tomtom'])} <a href="{e(s['fonte_url'])}"{clic(f"fonte-{c}", f"Fonte originale · {c}")}>Vai alla classifica TomTom</a>.</dd>
+<dt>Dati pubblicati</dt><dd>Tutte le {len(s['auto'])} auto della fila nei due casi: quando parte ognuna e quando passa la linea. Il codice della simulazione è in Python, con NumPy: chi vuole può cambiare le regole e rifare i conti.</dd>
+</dl></section>
+<section class="sezione" aria-labelledby="t-auto"><h2 id="t-auto">Le {len(s['auto'])} auto della fila</h2>
+<p class="nota">Distanza = metri dal muso dell'auto alla linea d'arresto. Oggi ogni auto parte quando indicato; se tutti sono pronti partono tutte dopo {parte_pronti} s. Col verde di 90 secondi passano {n_oggi} auto oggi e {n_pronti} se tutti sono pronti. In evidenza la tua auto, la 30ª.</p>
+<div class="tabella-box stretta"><table><thead><tr>
+<th class="num" rowspan="2">Auto</th><th class="num" rowspan="2">Distanza (m)</th><th class="num" colspan="2">Oggi</th><th class="num">Tutti pronti</th></tr>
+<tr><th class="num">parte</th><th class="num">passa la linea</th><th class="num">passa la linea</th>
+</tr></thead><tbody>{righe}</tbody></table></div>
+</section>
+<section class="sezione" aria-labelledby="t-numeri"><h2 id="t-numeri">Numeri del video</h2>
+<p class="nota">Ogni numero della simulazione mostrato o detto nel video. Le ore perse in coda sono nella classifica TomTom.</p>
+<div class="tabella-box"><table><thead><tr><th>Cosa</th><th class="num">Valore</th><th>Nota</th></tr></thead>
+<tbody>{numeri}</tbody></table></div></section>
+'''
+    corpo += piede()
+    open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8').write(corpo)
+
+
 # «Il tuo comune in numeri» (comune/index.html): un comune, i numeri di tutti i video pubblicati.
 # Per ogni video con un valore per comune: decimali e riferimento italiano (la riga dei «Numeri del video» con quel
 # testo). Un video nuovo non in elenco usa 1 decimale e la prima riga dei numeri con «Italia» e la stessa unità.
@@ -437,7 +507,7 @@ def pagina_comuni(voci, uscita):
     schede, province, regioni, zone, ultima = [], [], [], [], ''
     for v, s in voci:
         c = v['cartella']
-        if s.get('tipo') == 'settori':
+        if s.get('tipo') in ('settori', 'simulazione'):
             continue
         href = f'../video/{c}/index.html'
         ultima = max(ultima, v.get('pubblicato', ''))
@@ -577,6 +647,8 @@ def main():
         _, s = carica(v.get('sorgente', v['cartella']))
         if s.get('tipo') == 'settori':
             pagina_settori(v, s, uscita)
+        elif s.get('tipo') == 'simulazione':          # simulazione (25 · Semaforo): niente comuni, niente mappa
+            pagina_simulazione(v, s, uscita)
         elif s.get('livello') == 'regione':          # mappa per regione, niente dettaglio per comune
             pagina_regioni(v, s, uscita)
         else:

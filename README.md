@@ -65,6 +65,10 @@ perché il link è già in giro.
 
 Se la `scheda.json` del video ha `"tipo": "settori"` (es. il 07, paga oraria e valore creato per settore Ateco a 4 cifre), `costruisci.py` scrive la pagina dei settori al posto di quella dei comuni: stessa scheda (fonte, metodo, soglia, limiti), numeri del video e una tabella ricercabile e ordinabile dei settori (`assets/tabella_settori.js`), con la spunta «Solo i settori con più di 100.000 occupati» attiva di partenza. Niente mappa. I dati arrivano dal campo `settori` di `scheda.json` (le righe del CSV).
 
+## Video costruiti su una simulazione (non sui comuni)
+
+Se la `scheda.json` ha `"tipo": "simulazione"` (il 25 · Semaforo: una fila di 40 auto al semaforo), `costruisci.py` scrive la pagina della simulazione (`pagina_simulazione`): scheda (cosa misura, come funziona la simulazione, confronto, limiti, fonte esterna), una tabella con una riga per auto, i numeri del video e, oltre a Excel e CSV, il codice della simulazione da scaricare (`file.sim`). Niente mappa e niente ricerca. I dati li scrive `video/25_semaforo/esporta_sito.py`. Una classifica fatta da altri (qui le ore perse di TomTom, che non è un dato aperto) resta solo come link, spiegato nel campo `tomtom`. La pagina «Il tuo comune in numeri» salta questi video.
+
 ## Statistiche delle visite
 
 Il sito usa **GoatCounter** (senza cookie, quindi senza banner): cruscotto su https://comunechevai.goatcounter.com, con l'account del progetto. `costruisci.py` mette lo script in ogni pagina e conta come eventi i click su «Scarica Excel», «Scarica CSV», «Fonte originale», «Guarda su…» e sui profili social (nomi tipo `scarica-excel-01_eta`); conta anche, una volta per visita, chi usa la mappa (`mappa-01_eta`).
