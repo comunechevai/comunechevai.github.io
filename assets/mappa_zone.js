@@ -130,6 +130,15 @@
     if (D.colonne && D.colonne[2] && r[2]) dett.push(D.colonne[2].toLowerCase() + ' ' + r[2]);
     if (r[5]) dett.push('citato nel video');
     info.append(testo('p', 'nota', dett.join(' · ')));
+    // colonne in piu' (D.altre, es. pensionati e professionisti di ogni CAP): una riga sotto, «breve: valore»
+    const extra = [];
+    (D.altre || []).forEach((a, i) => {
+      const v = r[7 + i];
+      if (v == null || v === '') return;
+      const val = typeof v === 'string' ? v : fmt.format(v) + (a.unita === '%' ? '%' : (a.unita ? ' ' + a.unita : ''));
+      extra.push((a.breve ? a.breve + ' ' : '') + val);
+    });
+    if (extra.length) info.append(testo('p', 'nota', extra.join(' · ')));
     ridisegna();
   }
   canvas.addEventListener('click', (e) => {
