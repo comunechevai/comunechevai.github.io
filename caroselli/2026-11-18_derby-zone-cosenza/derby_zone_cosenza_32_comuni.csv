@@ -1,0 +1,33 @@
+posizione,comune,codice_istat,zona,residenti_1_1_2026,punti,reddito_complessivo_medio_2024_euro,bar_ristoranti_ogni_1000_abitanti_2024,eta_media_1_1_2026,notti_turisti_2025_zero_se_non_diffuse,lavoratori_entrano_meno_escono_ogni_100_abitanti_2021,punti_reddito,punti_bar,punti_eta,punti_turisti,punti_lavoratori,raccolta_differenziata_2024_pct_solo_derby,record_italia
+1,Rende,078102,Cosenza,36893,140,25525.39,6.74,45.19,149054.0,17.12,32,23,28,26,31,73.2,1° dal più alto su 3102 comuni con almeno 3.500 abitanti: iscritti_universita_per_100_giovani 2025 = 88.87
+2,Scalea,078138,Tirreno,11792,118,16502.53,10.14,46.19,368232.0,2.66,11,30,21,30,26,37.9,6° dal più alto su 3102 comuni con almeno 3.500 abitanti: quota_abitazioni_non_occupate 2023 = 76.31
+3,Cosenza,078045,Cosenza,63449,115,24717.66,6.17,47.66,72686.0,20.2,31,21,10,21,32,59.23,
+4,Corigliano-Rossano,078157,Ionio e Sila greca,74403,113,16662.05,5.48,43.94,769225.0,1.08,13,15,30,32,23,63.69,3° dal più alto su 3101 comuni con almeno 3.500 abitanti: aziende_agricole 2020 = 3980.00
+5,Diamante,078048,Tirreno,4947,111,19474.62,18.66,49.69,191213.0,3.21,23,32,1,28,27,50.44,
+5,Praia a Mare,078101,Tirreno,6268,111,19286.91,11.81,48.53,193577.0,2.18,22,31,4,29,25,59.91,
+7,Amantea,078010,Tirreno,13859,107,18658.57,7.66,46.35,104686.0,-0.66,20,26,19,23,19,63.2,
+8,Paola,078091,Tirreno,15090,106,21582.93,4.98,47.27,108653.0,3.44,28,13,13,24,28,78.35,
+9,Villapiana,078154,Pollino e Sibaritide,5612,98,16141.28,9.4,46.76,158632.0,-1.4,8,29,18,27,16,78.44,7° dal più alto su 3102 comuni con almeno 3.500 abitanti: quota_addetti_costruzioni 2024 = 42.22
+10,Belvedere Marittimo,078015,Tirreno,8927,97,18353.12,7.88,48.67,126831.0,1.31,18,27,3,25,24,56.7,
+10,Cariati,078025,Ionio e Sila greca,7582,97,16355.3,7.38,45.96,88437.0,-1.38,10,25,23,22,17,64.48,
+12,Trebisacce,078150,Pollino e Sibaritide,8582,93,20527.75,7.17,47.88,9686.0,0.56,27,24,8,13,21,63.03,
+13,Castrovillari,078033,Pollino e Sibaritide,20431,90,20336.12,5.48,47.91,5446.0,4.5,26,16,7,12,29,73.06,
+14,Cassano all'Ionio,078029,Pollino e Sibaritide,16337,88,14578.42,4.29,45.46,484322.0,0.79,1,7,27,31,22,74.1,
+15,San Lucido,078122,Tirreno,7775,83,17893.92,6.07,43.95,2453.0,-6.38,17,20,29,9,8,70.6,
+16,San Marco Argentano,078123,Pollino e Sibaritide,6769,82,16034.18,6.18,46.87,2242.0,5.83,6,22,16,8,30,80.65,
+17,Montalto Uffugo,078081,Cosenza,19909,81,19072.52,3.84,42.77,12064.0,-6.19,21,5,32,14,9,66.73,
+18,Santa Maria del Cedro,078132,Tirreno,5179,80,14996.21,8.56,46.98,42207.0,-2.97,3,28,14,20,15,62.39,
+19,San Giovanni in Fiore,078119,Cosenza,15328,76,18460.03,5.81,47.86,30679.0,-4.55,19,18,9,19,11,63.45,
+20,Tortora,078149,Tirreno,5919,72,16589.96,5.9,46.95,13427.0,-4.66,12,19,15,16,10,71.12,
+21,Fuscaldo,078058,Tirreno,7923,68,17476.29,4.8,46.29,15461.0,-8.68,15,11,20,17,5,44.53,
+22,Bisignano,078017,Cosenza,9428,67,16171.78,3.6,45.74,4563.0,-0.68,9,4,25,11,18,61.82,
+23,Cetraro,078040,Tirreno,9159,64,17227.28,4.84,48.32,25348.0,-3.34,14,12,6,18,14,69.94,
+24,Mendicino,078079,Cosenza,8892,62,22475.08,3.02,45.65,0.0,-19.92,29,2,26,4,1,76.33,
+25,Crosia,078047,Ionio e Sila greca,9616,61,14693.38,5.43,43.77,2616.0,-10.29,2,14,31,10,4,59.88,
+26,Casali del Manco,078156,Cosenza,9269,59,19524.42,4.28,47.62,13139.0,-16.83,24,6,12,15,2,85.12,6° dal più basso su 3102 comuni con almeno 3.500 abitanti: riscaldamento_dal_1961_1990 2025 = 1.23
+27,Spezzano Albanese,078142,Pollino e Sibaritide,6388,58,15938.04,4.78,46.76,1778.0,0.29,5,10,17,6,20,63.75,
+28,Acri,078003,Ionio e Sila greca,18059,55,17806.24,5.67,49.03,2088.0,-3.96,16,17,2,7,13,66.01,
+29,Luzzi,078070,Cosenza,8680,51,16115.4,4.34,45.92,747.0,-7.87,7,8,24,5,7,79.44,
+30,Castrolibero,078031,Cosenza,9074,49,24508.15,2.63,47.63,0.0,-14.36,30,1,11,4,3,69.8,10° dal più alto su 3102 comuni con almeno 3.500 abitanti: quota_diplomati_25_64 2024 = 84.09
+30,Rogliano,078105,Cosenza,5150,49,19939.19,4.78,48.44,0.0,-8.56,25,9,5,4,6,65.62,
+32,Roggiano Gravina,078104,Pollino e Sibaritide,6708,45,15136.48,3.4,46.09,0.0,-4.24,4,3,22,4,12,68.88,
