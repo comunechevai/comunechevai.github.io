@@ -147,5 +147,24 @@
     "instagram": "https://www.instagram.com/comunechevai/reel/DfxhLYARw-r/",
     "tiktok": "https://www.tiktok.com/@comunechevai/video/7708482776936369430",
     "youtube": "https://www.youtube.com/shorts/qYXsbACcYeY"
+  },
+  {
+    "cartella": "2026-11-18_derby-zone-cosenza",
+    "pubblicato": "2026-11-18",
+    "titolo": "Derby fra zone · Cosenza: Cosenza, Tirreno, Pollino e Sibaritide, Ionio e Sila greca in 7 sfide",
+    "fonte": "MEF, redditi IRPEF 2024; ISTAT (imprese ASIA 2024, popolazione per età al 1/1/2026, notti dei turisti 2025, matrice del pendolarismo 2021, sistemi locali del lavoro 2021, nascite 2025, censimento permanente 2023-2024, censimento dell'agricoltura 2020, matrice dei tempi in auto); ISPRA, rifiuti urbani 2024; MUR, iscritti per comune di residenza; ACI, parco veicoli 2025; Copernicus Climate Change Service, ERA5-Land; © OpenStreetMap contributors; FIGC e classifiche del 15-16/11/2026",
+    "fonte_url": "https://www.istat.it/classificazione/sistemi-locali-del-lavoro/",
+    "nota": "Un nostro gioco, non un indice ufficiale. Zone: 12 sistemi locali del lavoro ISTAT 2021 della provincia di Cosenza, interi, in 4 gruppi: Cosenza (sistema locale di Cosenza, 51 comuni), Tirreno (Praia a Mare, Scalea, Belvedere Marittimo, Paola, Amantea; 34 comuni), Pollino e Sibaritide (Castrovillari, Cassano all'Ionio, San Marco Argentano; 38 comuni), Ionio e Sila greca (Corigliano-Rossano, Cariati, Acri; 20 comuni): 143 comuni e 658.051 abitanti. Restano fuori i 7 comuni della provincia che stanno in sistemi locali di altre province (Rocca Imperiale, Canna, Nocara, Laino Borgo, Laino Castello, Mormanno, Panettieri). Le misure delle zone sono somme sui comuni: reddito complessivo medio 2024; bar, ristoranti, pizzerie e gelaterie (unità locali Ateco 56) ogni 1.000 abitanti (ASIA 2024); età media dei residenti al 1/1/2026 (vince la più bassa); notti dei turisti negli esercizi ricettivi nel 2025, in totale, zero dove l'ISTAT non diffonde il dato (84 comuni su 143); la squadra di calcio nella serie più alta; lavoratori che entrano nella zona meno quelli che escono ogni 100 abitanti (2021, solo i viaggi che passano il confine della zona); raccolta differenziata sul totale dei rifiuti urbani 2024 (ISPRA). Punti per sfida 3-2-1-0. Vince Cosenza 13 punti, Tirreno 11, Ionio e Sila greca 10, Pollino e Sibaritide 8; prima dell'ultima sfida, la differenziata, Cosenza e Tirreno erano a 11. Campionato: i 32 comuni con almeno 4.500 abitanti, 5 sfide sui numeri (redditi, bar e ristoranti, età, notti dei turisti, lavoratori), 32 punti al primo e 1 all'ultimo: Rende, Scalea, Cosenza; ultimo Roggiano Gravina; per media dei comuni la zona migliore è il Tirreno, l'ultima quella di Cosenza. Primati al contrario: Castrolibero (2,6 bar e ristoranti ogni 1.000 abitanti), Belvedere Marittimo (4,0 nati ogni 1.000 abitanti nel 2025), Roggiano Gravina (47,8 auto su 100 Euro 0-3), Cariati (74 minuti dall'uscita dell'autostrada più vicina). Record d'Italia, fra i 3.102 comuni italiani con almeno 3.500 abitanti (ultimo anno di ogni indicatore, primi o ultimi 20 senza pari merito): Rende 1° per iscritti all'università ogni 100 residenti di 19-25 anni (88,9, a.a. 2025/26, dati provvisori), Corigliano-Rossano 3° per numero di aziende agricole (3.980, censimento 2020), Scalea 6° per quota di abitazioni senza residenti (76,3%, 2023), Casali del Manco 6° dal basso per aumento della temperatura media dal 1961-1990 (+1,2 °C, ERA5-Land), Villapiana 7° per quota di addetti nelle costruzioni (42,2%, ASIA 2024), Castrolibero 10° per quota di 25-64enni con almeno il diploma (84,1%, 2024). Limiti: sfide scelte da noi; le notti dei turisti non contano chi viene in giornata; pendolari del 2021; classifiche del calcio al 15-16/11. Musica del reel: «Hidden Agenda» e «Der Kleber Sting» di Kevin MacLeod (incompetech.com), licenza CC BY 4.0.",
+    "file": [
+      "derby_zone_cosenza_zone.csv",
+      "derby_zone_cosenza_32_comuni.csv"
+    ],
+    "instagram": "https://www.instagram.com/reel/Df5OuXHxvqH/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7709592953689279766",
+    "youtube": "https://youtube.com/shorts/nvHeubiY530",
+    "etichette": {
+      "derby_zone_cosenza_zone.csv": "Scarica le 4 zone (CSV)",
+      "derby_zone_cosenza_32_comuni.csv": "Scarica i 32 comuni (CSV)"
+    }
   }
 ]
