@@ -166,5 +166,24 @@
       "derby_zone_cosenza_zone.csv": "Scarica le 4 zone (CSV)",
       "derby_zone_cosenza_32_comuni.csv": "Scarica i 32 comuni (CSV)"
     }
+  },
+  {
+    "cartella": "2026-11-20_54321-olbia",
+    "pubblicato": "2026-11-20",
+    "titolo": "Olbia in 5 4 3 2 1: 5 numeri, 4 primati, 3 porte aperte, 2 punti deboli e 1 sorpresa",
+    "fonte": "ISTAT (popolazione al 1/1/2026, censimenti 1951-2024, censimento permanente 2023 e 2024, movimento turistico 2025, trasporto aereo e marittimo 2025, previsioni comunali base 1/1/2025); MEF, redditi IRPEF 2024; Agenzia delle Entrate, OMI (compravendite 2025, quotazioni del 1° semestre 2026)",
+    "fonte_url": "https://demo.istat.it/",
+    "nota": "La nostra versione della sfida «5 4 3 2 1» di TikTok, con i numeri di Olbia. Classifiche fra i 119 capoluoghi di provincia del 2026, con le nuove province sarde: Olbia è prima per crescita degli abitanti dal 1951 (+322%, da 14.601 a 61.681), per quota più bassa di residenti con 65 anni e più (20,6%), per case vendute ogni 1.000 abitanti nel 2025 (20,1, su 115 capoluoghi con il dato: mancano Trento, Bolzano, Trieste e Gorizia, catasto tavolare) e per quota di contribuenti con reddito da lavoro dipendente (63,4%); è 17ª dal basso per reddito complessivo medio (23.227 €) e 9ª dal basso per laureati di 25-64 anni (19,2%). Nel 2050 l'età media prevista dall'ISTAT (scenario mediano) è 53,4 anni, contro 45,8 oggi: fra i capoluoghi aumentano di più solo Nuoro e Sanluri. Altri numeri: prezzo medio delle case 2.416 €/m² (media delle quotazioni OMI delle zone, non prezzi di vendita), abitazioni senza residenti 33,6% (seconde case, case vuote o affittate a chi non ha la residenza), 18,8 notti di turisti per abitante nel 2025, di cui due terzi di stranieri, 4,1 milioni di passeggeri all'aeroporto e 3,8 milioni al porto (arrivi e partenze, residenti compresi). Foto da Wikimedia Commons, ritagliate: Tavolara from South (Mikołaj Kirschke, CC BY-SA 3.0), Case olbia1 (Stefano Bolognini, CC BY-SA 3.0), Aerial view of Olbia (Japs 88, CC BY-SA 4.0), Banchina Isola Bianca (Giorgio Galeotti, CC BY 4.0), Il quartiere di Poltu Quadu (Shardan, CC BY-SA 3.0), Tavolara al tramonto (Carlo Pelagalli, CC BY-SA 3.0), Olbia, frazione Porto Rotondo (Gianni Careddu, CC BY-SA 4.0). I file hanno i numeri delle slide con valore esatto, anno e fonte, e i 119 capoluoghi con i valori usati per le classifiche.",
+    "file": [
+      "olbia_54321_numeri.csv",
+      "olbia_54321_capoluoghi.csv"
+    ],
+    "etichette": {
+      "olbia_54321_numeri.csv": "Scarica i numeri delle slide (CSV)",
+      "olbia_54321_capoluoghi.csv": "Scarica i 119 capoluoghi (CSV)"
+    },
+    "instagram": "https://www.instagram.com/reel/Df9Jlj-RF8d/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7710155963528989984",
+    "youtube": ""
   }
 ]
