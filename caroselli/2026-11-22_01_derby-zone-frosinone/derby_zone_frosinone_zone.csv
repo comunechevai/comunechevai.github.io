@@ -1,0 +1,8 @@
+versione,zona,comuni,residenti,fuori_provincia,reddito,contribuenti,bar,locali,fabbriche,associazioni,enti,turisti,comuni_senza_notti,posti_letto,lavoratori,entrano,escono,verso_roma,occupati,universita,iscritti,punti
+4 zone,Frosinone,27,200035,Prossedi,22345.734,132474,4.745,954,5.681,26.545,531,193018.0,14,4066,-1.683,11321,14764,7631,62228,3.424,685,11
+4 zone,Cassino,33,125730,"Rocca d'Evandro, San Pietro Infine",21709.408,82942,5.352,677,6.753,31.337,394,144300.0,24,4940,-1.272,6178,7817,2560,38047,62.586,7869,13
+4 zone,Sora,23,87111,Balsorano,21356.452,59166,5.798,509,4.204,37.424,326,58757.0,13,3209,-6.291,2888,8524,1898,26600,6.739,587,8
+4 zone,Anagni,22,109777,"Affile, Arcinazzo Romano, Artena, Carpineto Romano, Colleferro, Gavignano, Gorga, Jenne, Montelanico, Segni, Vallepietra",22658.028,74541,5.259,578,6.708,22.591,248,1054045.0,12,15313,-4.179,9285,13927,11095,35170,0.738,81,10
+3 zone,Frosinone,49,309812,"Affile, Arcinazzo Romano, Artena, Carpineto Romano, Colleferro, Gavignano, Gorga, Jenne, Montelanico, Prossedi, Segni, Vallepietra",22458.183,207015,4.927,1532,6.045,25.144,779,1247063.0,26,19379,-2.562,14671,22756,18019,97398,2.472,766,7
+3 zone,Cassino,33,125730,"Rocca d'Evandro, San Pietro Infine",21709.408,82942,5.352,677,6.753,31.337,394,144300.0,24,4940,-1.272,6178,7817,2560,38047,62.586,7869,9
+3 zone,Sora,23,87111,Balsorano,21356.452,59166,5.798,509,4.204,37.424,326,58757.0,13,3209,-6.291,2888,8524,1898,26600,6.739,587,5

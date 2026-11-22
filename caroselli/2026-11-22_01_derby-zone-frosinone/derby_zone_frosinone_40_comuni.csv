@@ -1,0 +1,41 @@
+posizione,comune,codice_istat,provincia,zona_4,zona_3,residenti_1_1_2026,punti,reddito_complessivo_medio_2024_euro,bar_ristoranti_ogni_1000_abitanti_2024,enti_terzo_settore_ogni_10000_abitanti_2026,notti_turisti_2025_zero_se_non_diffuse,lavoratori_entrano_meno_escono_ogni_100_abitanti_2021,punti_reddito,punti_bar,punti_associazioni,punti_turisti,punti_lavoratori,record_italia
+1,Frosinone,060038,FR,Frosinone,Frosinone,42836,191,26050.35,6.72,45.06,109223.0,29.05,40,36,37,39,39,
+2,Cassino,060019,FR,Cassino,Cassino,34760,181,23584.59,6.9,39.13,85845.0,11.24,36,37,35,38,35,
+3,Castrocielo,060022,FR,Cassino,Cassino,3727,159,22754.66,6.96,26.83,27066.0,-2.36,32,38,23,35,31,
+4,Isola del Liri,060043,FR,Sora,Sora,10517,156,23591.46,8.02,30.43,3466.0,-5.09,37,39,30,22,28,
+5,Sora,060074,FR,Sora,Sora,24672,155,22086.21,6.27,32.43,23595.0,3.64,22,34,31,34,34,
+6,Fiuggi,060035,FR,Anagni,Frosinone,10180,150,21905.27,5.98,28.49,963927.0,-3.85,20,32,28,40,30,
+7,Colleferro,058034,RM,Anagni,Frosinone,20381,146,24940.72,6.51,17.66,14545.0,13.66,39,35,6,29,37,
+8,Anagni,060006,FR,Anagni,Frosinone,20630,141,22791.06,5.43,18.9,35205.0,13.29,33,26,9,37,36,
+9,Patrica,060048,FR,Frosinone,Frosinone,3049,135,23158.11,5.92,19.68,3383.0,21.26,35,30,11,21,38,
+9,Arpino,060010,FR,Sora,Sora,6512,135,22688.08,4.11,52.21,17910.0,-12.63,30,18,39,33,15,17° dal più alto su 3102 comuni con almeno 3.500 abitanti: quota_diplomati_25_64 2024 = 83.1
+11,Piedimonte San Germano,060052,FR,Cassino,Cassino,6326,134,21456.68,4.92,26.87,16104.0,59.65,16,22,24,32,40,8° dal più alto su 3102 comuni con almeno 3.500 abitanti: saldo_pendolari_lavoro_per_100_abitanti 2021 = 59.7
+12,Arce,060008,FR,Cassino,Cassino,5376,130,22814.24,5.94,35.34,905.0,-11.79,34,31,32,13,20,
+12,Ceprano,060025,FR,Frosinone,Frosinone,7940,130,22371.73,4.99,22.67,14886.0,-4.73,28,24,19,30,29,
+12,Atina,060011,FR,Sora,Sora,4079,130,19363.58,10.99,66.19,951.0,2.86,3,40,40,14,33,10° dal più alto su 3102 comuni con almeno 3.500 abitanti: enti_terzo_settore_per_10000_abitanti 2026 = 66.2
+15,Aquino,060007,FR,Cassino,Cassino,4898,117,21721.63,5.71,40.83,0.0,-10.66,18,29,36,12,22,
+16,Sant'Elia Fiumerapido,060068,FR,Cassino,Cassino,5549,116,20389.22,5.54,50.46,5942.0,-12.07,7,28,38,26,17,
+17,Ferentino,060033,FR,Frosinone,Frosinone,19902,112,22604.74,3.86,13.57,30801.0,0.63,29,14,1,36,32,
+18,Roccasecca,060060,FR,Cassino,Cassino,6671,107,22714.64,3.86,22.49,1352.0,-5.26,31,15,18,16,27,
+19,Castro dei Volsci,060023,FR,Frosinone,Frosinone,4337,106,21559.89,5.51,27.67,4596.0,-13.34,17,27,25,24,13,
+20,Piglio,060053,FR,Anagni,Frosinone,4248,102,22061.34,6.05,25.89,5847.0,-19.21,21,33,21,25,2,
+21,Alatri,060003,FR,Frosinone,Frosinone,27436,94,22091.4,4.47,21.5,2113.0,-12.29,23,21,15,19,16,
+22,Paliano,060046,FR,Anagni,Frosinone,7852,92,22119.66,4.45,20.38,1267.0,-10.78,24,20,12,15,21,
+23,Veroli,060085,FR,Frosinone,Frosinone,19402,90,20506.67,5.02,15.98,13735.0,-9.0,9,25,3,28,25,
+23,Ripi,060058,FR,Frosinone,Frosinone,4991,90,20206.71,4.97,28.05,0.0,-10.42,6,23,26,12,23,
+25,Pontecorvo,060056,FR,Cassino,Cassino,12067,89,21405.91,3.8,26.52,1595.0,-10.16,15,11,22,17,24,
+26,Ceccano,060024,FR,Frosinone,Frosinone,21962,87,22217.35,3.35,20.95,2304.0,-11.86,27,7,14,20,19,
+27,Cervaro,060026,FR,Cassino,Cassino,7708,84,22141.96,3.85,28.54,0.0,-16.74,25,13,29,12,5,
+28,Morolo,060045,FR,Frosinone,Frosinone,3114,83,22180.78,4.13,25.69,0.0,-16.47,26,19,20,12,6,
+29,Balsorano,066007,AQ,Sora,Sora,3196,78,20543.69,3.09,37.55,0.0,-12.02,10,5,33,12,18,
+30,Segni,058102,RM,Anagni,Frosinone,8961,75,23842.59,2.57,17.86,11248.0,-20.42,38,2,7,27,1,
+31,Artena,058011,RM,Anagni,Frosinone,13676,68,21855.91,3.52,14.62,15611.0,-14.91,19,8,2,31,8,
+31,Monte San Giovanni Campano,060044,FR,Sora,Sora,11794,68,20445.41,3.03,38.15,0.0,-14.14,8,4,34,12,10,14° dal più alto su 3102 comuni con almeno 3.500 abitanti: quota_addetti_costruzioni 2024 = 37.3
+33,Supino,060076,FR,Frosinone,Frosinone,4557,60,20951.6,3.92,17.56,1860.0,-14.43,12,16,5,18,9,
+34,Castelliri,060020,FR,Sora,Sora,3089,59,20807.75,3.17,16.19,0.0,-8.74,11,6,4,12,26,
+35,Amaseno,060005,FR,Frosinone,Frosinone,4029,58,19030.83,3.93,22.34,0.0,-14.11,1,17,17,12,11,
+36,Carpineto Romano,058020,RM,Anagni,Frosinone,3911,55,21266.66,3.8,20.46,0.0,-18.71,14,12,13,12,4,
+37,Torrice,060079,FR,Frosinone,Frosinone,4648,54,20977.64,3.65,21.51,0.0,-18.95,13,10,16,12,3,
+37,Esperia,060031,FR,Cassino,Cassino,3545,54,19650.19,2.8,28.21,0.0,-15.04,5,3,27,12,7,12° dal più basso su 3102 comuni con almeno 3.500 abitanti: rifiuti_urbani_kg_per_abitante 2024 = 240.7
+37,Pofi,060055,FR,Frosinone,Frosinone,3847,54,19128.06,3.63,18.2,4265.0,-13.82,2,9,8,23,12,
+40,Boville Ernica,060014,FR,Frosinone,Frosinone,8214,41,19382.28,1.94,19.48,0.0,-12.94,4,1,10,12,14,1° dal più alto su 3102 comuni con almeno 3.500 abitanti: quota_addetti_costruzioni 2024 = 54.6
