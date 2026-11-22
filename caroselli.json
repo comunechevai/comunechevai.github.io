@@ -213,5 +213,24 @@
     "instagram": "https://www.instagram.com/reel/DgA_qJixs8b/",
     "tiktok": "https://www.tiktok.com/@comunechevai/video/7710711037816802582",
     "youtube": "https://www.youtube.com/shorts/LGhYSim23NQ"
+  },
+  {
+    "cartella": "2026-11-22_01_derby-zone-frosinone",
+    "pubblicato": "2026-11-22",
+    "titolo": "Derby fra zone · Frosinone: Frosinone, Cassino, Sora e Anagni in 7 sfide",
+    "fonte": "MEF, redditi IRPEF 2024; ISTAT (imprese ASIA 2024, notti dei turisti 2025, matrice del pendolarismo 2021, sistemi locali del lavoro 2021, nascite 2025, censimento permanente 2024, matrice dei tempi in auto); Ministero del Lavoro, RUNTS (13/11/2026); MUR, iscritti a.a. 2024/25; ISPRA, rifiuti urbani 2024; © OpenStreetMap contributors; FIGC e classifiche del 15-16/11/2026",
+    "fonte_url": "https://www.istat.it/classificazione/sistemi-locali-del-lavoro/",
+    "nota": "Un nostro gioco, non un indice ufficiale. Zone: i sistemi locali del lavoro ISTAT 2021 di Frosinone, Cassino, Sora e Anagni, interi: 105 comuni e 522.653 abitanti, con 15 comuni di altre province (11 romani nel sistema di Anagni, 2 casertani in quello di Cassino, 1 pontino in quello di Frosinone, 1 aquilano in quello di Sora); Acquafondata, che l'ISTAT mette nel sistema di Venafro, resta fuori. Nella versione a 3 zone Anagni è unita a Frosinone. Le misure delle zone sono somme sui comuni: reddito complessivo medio 2024; bar, ristoranti, pizzerie e gelaterie (unità locali Ateco 56) ogni 1.000 abitanti (ASIA 2024); enti del Terzo settore con sede nella zona ogni 10.000 abitanti (RUNTS); notti dei turisti negli esercizi ricettivi nel 2025, in totale, zero dove l'ISTAT non diffonde il dato (63 comuni su 105); la squadra di calcio nella serie più alta; lavoratori che entrano nella zona meno quelli che escono ogni 100 abitanti (2021, solo i viaggi che passano il confine della zona); iscritti ai corsi universitari con sede nella zona ogni 1.000 abitanti (a.a. 2024/25). Punti per sfida: 3-2-1-0 con quattro zone, 2-1-0 con tre. Vince Cassino in tutte e due le versioni (13-11-10-8; 9-7-5), e decide l'università. Campionato: i 40 comuni con almeno 3.000 abitanti, 5 sfide sui numeri (redditi, bar e ristoranti, associazioni, notti dei turisti, lavoratori), 40 punti al primo e 1 all'ultimo: Frosinone, Cassino, Castrocielo; ultimo Boville Ernica. Primati al contrario, fra i 35 comuni della provincia: Fiuggi (506 kg di rifiuti urbani per abitante, contano anche quelli dei turisti), Boville Ernica (1,9 bar e ristoranti ogni 1.000 abitanti), Aquino (3,5 nati ogni 1.000 abitanti nel 2025), Sora (31 minuti dal casello). Record d'Italia, fra i 3.102 comuni italiani con almeno 3.500 abitanti (ultimo anno di ogni indicatore, primi o ultimi 20 senza pari merito; solo comuni della provincia; Castelliri, Morolo e Patrica sono sotto i 3.500): Boville Ernica 1° per quota di addetti nelle costruzioni (54,6%), Piedimonte San Germano 8° per lavoratori che entrano meno quelli che escono (59,7 ogni 100 abitanti), Atina 10° per enti del Terzo settore (66,2 ogni 10.000 abitanti), Esperia 12° per rifiuti urbani più bassi (240,7 kg per abitante), Monte San Giovanni Campano 14° per quota di addetti nelle costruzioni (37,3%), Arpino 17° per quota di 25-64enni con almeno il diploma (83,1%). Limiti: sfide scelte da noi; le notti dei turisti non contano chi viene in giornata; enti contati nella sede legale; pendolari del 2021; classifiche del calcio al 15-16/11. Musica del reel: «Hidden Agenda» e «Der Kleber Sting» di Kevin MacLeod (incompetech.com), licenza CC BY 4.0.",
+    "file": [
+      "derby_zone_frosinone_zone.csv",
+      "derby_zone_frosinone_40_comuni.csv"
+    ],
+    "instagram": "https://www.instagram.com/reel/DgC1ZGQx2b0/",
+    "tiktok": "https://www.tiktok.com/@comunechevai/video/7711054302919347478",
+    "youtube": "",
+    "etichette": {
+      "derby_zone_frosinone_zone.csv": "Scarica le zone (CSV)",
+      "derby_zone_frosinone_40_comuni.csv": "Scarica i 40 comuni (CSV)"
+    }
   }
 ]
